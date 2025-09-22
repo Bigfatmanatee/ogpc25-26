@@ -10,7 +10,7 @@ public class Player : MonoBehaviour
     private InputAction m_AttackAction;
     private InputAction m_JumpAction;
     // private bool facingL;
-    [SerializeField] private float sinceLastSwing = 0;
+    private float sinceLastSwing = 0;
     private Rigidbody2D rb;
     private LayerMask LmG; //Ground layer mask
     private LayerMask LmE; //Enemy layer mask
