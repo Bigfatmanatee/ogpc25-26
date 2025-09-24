@@ -1,10 +1,12 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class AttColider : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private string layerName;
-    private GameObject Host;
+    [SerializeField] private GameObject Host;
+    private bool hostIsPlayer = false;
     void Start()
     {
 
@@ -16,15 +18,36 @@ public class AttColider : MonoBehaviour
 
     }
 
-    void OnTriggerEnter2D(Collider2D collision) //needs to get assigned host (aka player) to send back info
+    void OnTriggerEnter2D(Collider2D collision) //needs to get assigned host to send back info
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer(layerName))
         {
-            Host.GetComponent<Player>().attack(collision.gameObject);
+
+            if (hostIsPlayer)
+            {
+                Host.GetComponent<Player>().attack(collision.gameObject);
+            }
+            else
+            {
+                Host.GetComponent<LREnemy>().trigger(true, collision.gameObject);
+            }
+
+        }
+    }
+    void OnTriggerExit2D(Collider2D collision)
+    {
+        if (!hostIsPlayer)
+        {
+            Host.GetComponent<LREnemy>().trigger(false, collision.gameObject);
         }
     }
 
-    public void setLayerName(string nm) {
+    public void setLayerName(string nm)
+    {
         layerName = nm;
+    }
+    public void isPlayer()
+    {
+        hostIsPlayer = true;
     }
 }

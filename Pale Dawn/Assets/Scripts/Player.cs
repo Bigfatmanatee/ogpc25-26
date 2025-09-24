@@ -101,7 +101,7 @@ public class Player : MonoBehaviour
         {
             sinceLastSwing += Time.deltaTime;
         }
-            
+
 
 
 
@@ -154,6 +154,12 @@ public class Player : MonoBehaviour
     public void attack(GameObject enemy)
     {
         //this has access to enemy hitbox gameobject, create another script to pass through damage
+    }
+
+    public void damage(GameObject enemy)
+    {
+        // health -= enemy.getDamage();
+        // iframe stuff
     }
     
 }
