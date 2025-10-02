@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -24,19 +25,23 @@ public class Player : MonoBehaviour
     [SerializeField] private float speed;
     [SerializeField] private float jumpPower;
     [SerializeField] private int maxHealth;
+    [SerializeField] private int health;
     [SerializeField] private float swingTime;
     [SerializeField] private float swingCooldown;
 
 
+
     private void Start()
     {
+        health = maxHealth;
         rb = GetComponent<Rigidbody2D>();
         LmG = LayerMask.GetMask("Ground");
         LmE = LayerMask.GetMask("EnemyHit");
         LmA = LayerMask.GetMask("Attack");
-        // facingL = true;
 
         attHitBox.enabled = false;
+        // attHitBox.GetComponent<AttColider>().isPlayer();
+        attHitBox.GetComponent<AttColider>().setLayerName("EnemyHit");
 
 
         m_MoveAction = new InputAction("Move");
@@ -111,7 +116,6 @@ public class Player : MonoBehaviour
             jumping = true;
 
 
-        //Debug.Log("Jumping: "+jumping);
         if (m_JumpAction.WasPressedThisFrame() && isGrounded()) //normal jumping
         {
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpPower);
@@ -135,12 +139,10 @@ public class Player : MonoBehaviour
         rb.linearVelocity = new Vector2(m_PlayerMovement.x * speed, rb.linearVelocity.y);
         if (rb.linearVelocityX > 0) //Facing direction
         {
-            // facingL = true;
             transform.eulerAngles = new Vector3(0, 0, 0); // Normal
         }
         else if (rb.linearVelocityX < 0)
         {
-            // facingL = false;
             transform.eulerAngles = new Vector3(0, 180, 0); // Flipped
         }
     }
@@ -154,13 +156,24 @@ public class Player : MonoBehaviour
     public void attack(GameObject enemy)
     {
         //this has access to enemy hitbox gameobject, create another script to pass through damage
+        var Host = enemy.GetComponent<HitboxPass>().passHost();
+        Host.GetComponent<LREnemy>().damage(this.gameObject);
     }
 
     public void damage(GameObject enemy)
     {
-        // health -= enemy.getDamage();
+        Debug.Log("Damage recived, sent by " + enemy);
+        Debug.Log("Before damage, Health:" + health);
+        health -= enemy.GetComponent<LREnemy>().getDamage();
+        Debug.Log("After damage taken, Health:" + health);
         // iframe stuff
-        Debug.Log("Damage recived, sent by" + enemy);
+
+
+
+    }
+
+    public int getDamage() {
+        return 1;
     }
     
 }

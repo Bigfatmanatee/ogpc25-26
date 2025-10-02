@@ -7,6 +7,8 @@ public class LREnemy : MonoBehaviour
     // [SerializeField] private int movementPattern = 1; //1=left & right
     [SerializeField] private float speed = 5;
     [SerializeField] private int maxHealth = 5;
+    [SerializeField] private int health = 5;
+    [SerializeField] private int damageNum = 1;
 
     [SerializeField] private float attTime;
     [SerializeField] private float attCooldown;
@@ -21,12 +23,12 @@ public class LREnemy : MonoBehaviour
     [SerializeField] private Collider2D attHitBox;
     [SerializeField] private Transform wallCheck;
     [SerializeField] private Transform groundCheck;
-    private int health;
     private int direction = 1;
     private Rigidbody2D rb;
     private LayerMask LmG;
     void Start()
     {
+        health = maxHealth;
         LmG = LayerMask.GetMask("Ground");
         rb = GetComponent<Rigidbody2D>();
         health = maxHealth;
@@ -50,6 +52,7 @@ public class LREnemy : MonoBehaviour
     {
         if (sinceLastAtt >= attCooldown && shouldSwing)
         {
+            Debug.Log("Running swing function");
             StartCoroutine(swing());
             sinceLastAtt = -attTime;
         }
@@ -81,7 +84,7 @@ public class LREnemy : MonoBehaviour
         {
             rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
         }
-        
+
         if (rb.linearVelocityX > 0) //Facing direction
         {
             transform.eulerAngles = new Vector3(0, 0, 0); // Normal
@@ -105,7 +108,8 @@ public class LREnemy : MonoBehaviour
         {
             Debug.Log("Layer " + getTarget() + " detected entering att hitbox");
             shouldSwing = true;
-            target = gObject;
+            target = gObject.GetComponent<HitboxPass>().passHost();
+            Debug.Log("Target saved as " + target);
         }
         else
         {
@@ -115,8 +119,20 @@ public class LREnemy : MonoBehaviour
         }
 
     }
+    public void damage(GameObject player)
+    {
+        Debug.Log("Damage recived, sent by " + player);
+        Debug.Log("Before damage, Health:" + health);
+        health -= player.GetComponent<Player>().getDamage();
+        Debug.Log("After damage taken, Health:" + health);
+        // iframe stuff
+    }
     public string getTarget()
     {
         return "Player";
+    }
+    public int getDamage()
+    {
+        return damageNum;
     }
 }

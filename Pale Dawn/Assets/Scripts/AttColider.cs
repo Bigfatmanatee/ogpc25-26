@@ -6,7 +6,7 @@ public class AttColider : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private string layerName;
     [SerializeField] private GameObject Host;
-    private bool hostIsPlayer = false;
+    [SerializeField] private bool hostIsPlayer = false;
     void Start()
     {
         if (!hostIsPlayer)

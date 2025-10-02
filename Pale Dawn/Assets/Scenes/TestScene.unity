@@ -129,6 +129,7 @@ GameObject:
   m_Component:
   - component: {fileID: 20353296}
   - component: {fileID: 20353297}
+  - component: {fileID: 20353298}
   m_Layer: 10
   m_Name: Hitbox
   m_TagString: Untagged
@@ -188,6 +189,19 @@ CapsuleCollider2D:
   m_Offset: {x: 0.05, y: 0}
   m_Size: {x: 0.75, y: 0.8}
   m_Direction: 0
+--- !u!114 &20353298
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 20353295}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61fd753787bada946b4b54b2de9b3976, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HitboxPass
+  Host: {fileID: 1494660039}
 --- !u!1 &307162976
 GameObject:
   m_ObjectHideFlags: 0
@@ -311,6 +325,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AttColider
   Host: {fileID: 2071433237}
+  hostIsPlayer: 0
 --- !u!1 &644144680
 GameObject:
   m_ObjectHideFlags: 0
@@ -321,6 +336,7 @@ GameObject:
   m_Component:
   - component: {fileID: 644144681}
   - component: {fileID: 644144682}
+  - component: {fileID: 644144683}
   m_Layer: 0
   m_Name: AttHit
   m_TagString: Untagged
@@ -380,6 +396,20 @@ CapsuleCollider2D:
   m_Offset: {x: 0.2, y: 0}
   m_Size: {x: 1.5, y: 0.5}
   m_Direction: 1
+--- !u!114 &644144683
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 644144680}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4eeef81ec34b979488eaf909a0991e8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AttColider
+  Host: {fileID: 1494660039}
+  hostIsPlayer: 1
 --- !u!1 &841949190
 GameObject:
   m_ObjectHideFlags: 0
@@ -738,6 +768,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1238740637}
   - component: {fileID: 1238740638}
+  - component: {fileID: 1238740639}
   m_Layer: 8
   m_Name: Hitbox
   m_TagString: Untagged
@@ -806,6 +837,19 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.9, y: 0.85}
   m_EdgeRadius: 0
+--- !u!114 &1238740639
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1238740636}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61fd753787bada946b4b54b2de9b3976, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HitboxPass
+  Host: {fileID: 2071433237}
 --- !u!1 &1494660039
 GameObject:
   m_ObjectHideFlags: 0
@@ -950,6 +994,7 @@ MonoBehaviour:
   speed: 7.5
   jumpPower: 7.5
   maxHealth: 5
+  health: 0
   swingTime: 0.75
   swingCooldown: 1
 --- !u!114 &1494660045
@@ -2191,9 +2236,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2071433240}
+  - component: {fileID: 2071433241}
   - component: {fileID: 2071433239}
   - component: {fileID: 2071433238}
-  - component: {fileID: 2071433241}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -2308,6 +2353,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::LREnemy
   speed: 3
   maxHealth: 5
+  health: 5
+  damageNum: 1
   attTime: 1
   attCooldown: 1
   maxIframes: 1
