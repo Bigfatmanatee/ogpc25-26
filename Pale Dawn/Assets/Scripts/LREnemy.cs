@@ -65,22 +65,29 @@ public class LREnemy : MonoBehaviour
         yield return new WaitForSeconds(attTime); //should match animation
         if (shouldSwing && target.GetComponent<Player>() != null)
         {
-            target.GetComponent<Player>().damage(this); //idk how to do this again
+            Debug.Log("sending damage to " + target);
+            target.GetComponent<Player>().damage(this.gameObject);
         }
     }
 
 
     private void FixedUpdate()
     {
-        rb.linearVelocity = new Vector2(speed * direction, rb.linearVelocity.y);
+        if (!shouldSwing)
+        {
+            rb.linearVelocity = new Vector2(speed * direction, rb.linearVelocity.y);
+        }
+        else
+        {
+            rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
+        }
+        
         if (rb.linearVelocityX > 0) //Facing direction
         {
-            // facingL = true;
             transform.eulerAngles = new Vector3(0, 0, 0); // Normal
         }
         else if (rb.linearVelocityX < 0)
         {
-            // facingL = false;
             transform.eulerAngles = new Vector3(0, 180, 0); // Flipped
         }
     }
@@ -96,14 +103,20 @@ public class LREnemy : MonoBehaviour
     {
         if (enter)
         {
+            Debug.Log("Layer " + getTarget() + " detected entering att hitbox");
             shouldSwing = true;
             target = gObject;
         }
         else
         {
+            Debug.Log("Layer " + getTarget() + " detected exiting att hitbox");
             shouldSwing = false;
             target = null;
         }
 
+    }
+    public string getTarget()
+    {
+        return "Player";
     }
 }

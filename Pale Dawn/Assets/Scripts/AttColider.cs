@@ -9,7 +9,10 @@ public class AttColider : MonoBehaviour
     private bool hostIsPlayer = false;
     void Start()
     {
-
+        if (!hostIsPlayer)
+        {
+            layerName = Host.GetComponent<LREnemy>().getTarget();
+        }
     }
 
     // Update is called once per frame
@@ -36,9 +39,12 @@ public class AttColider : MonoBehaviour
     }
     void OnTriggerExit2D(Collider2D collision)
     {
-        if (!hostIsPlayer)
+        if (collision.gameObject.layer == LayerMask.NameToLayer(layerName))
         {
-            Host.GetComponent<LREnemy>().trigger(false, collision.gameObject);
+            if (!hostIsPlayer)
+            {
+                Host.GetComponent<LREnemy>().trigger(false, collision.gameObject);
+            }
         }
     }
 

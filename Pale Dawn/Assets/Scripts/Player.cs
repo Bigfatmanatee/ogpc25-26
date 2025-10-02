@@ -160,6 +160,7 @@ public class Player : MonoBehaviour
     {
         // health -= enemy.getDamage();
         // iframe stuff
+        Debug.Log("Damage recived, sent by" + enemy);
     }
     
 }
