@@ -504,7 +504,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 4.5
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -592,7 +592,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Camera
   followPos: {fileID: 1494660043}
-  speed: 0
+  speed: 0.075
 --- !u!1 &881425804
 GameObject:
   m_ObjectHideFlags: 0
@@ -2368,7 +2368,7 @@ Rigidbody2D:
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 2aace35167f47714fbf28cc551a71605, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
