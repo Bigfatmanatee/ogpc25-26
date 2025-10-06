@@ -12,10 +12,10 @@ public class LREnemy : MonoBehaviour
 
     [SerializeField] private float attTime;
     [SerializeField] private float attCooldown;
-    [SerializeField] private float maxIframes;
+    [SerializeField] private float maxInvSec;
     private float sinceLastAtt;
     private GameObject target;
-    private float Iframes;
+    private float InvSec = 0;
     private bool shouldSwing;
 
 
@@ -45,7 +45,7 @@ public class LREnemy : MonoBehaviour
         {
             attack();
         }
-
+        InvSec += Time.deltaTime;
     }
 
     private void attack()
@@ -123,9 +123,20 @@ public class LREnemy : MonoBehaviour
     {
         Debug.Log("Damage recived, sent by " + player);
         Debug.Log("Before damage, Health:" + health);
-        health -= player.GetComponent<Player>().getDamage();
-        Debug.Log("After damage taken, Health:" + health);
-        // iframe stuff
+
+        if (InvSec >= maxInvSec)
+        {
+            health -= player.GetComponent<Player>().getDamage();
+            Debug.Log("After damage taken, Health:" + health);
+            //play Iframe animation
+            InvSec = 0;
+        }
+        else
+        {
+            Debug.Log("didnt take damage, still invincible");
+        }
+
+        
     }
     public string getTarget()
     {

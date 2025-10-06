@@ -28,6 +28,8 @@ public class Player : MonoBehaviour
     [SerializeField] private int health;
     [SerializeField] private float swingTime;
     [SerializeField] private float swingCooldown;
+    [SerializeField] private float maxInvSec;
+    private float InvSec = 0;
 
 
 
@@ -132,6 +134,7 @@ public class Player : MonoBehaviour
         {
             rb.gravityScale = 1f;
         }
+        InvSec += Time.deltaTime;
     }
 
     private void FixedUpdate()
@@ -164,9 +167,20 @@ public class Player : MonoBehaviour
     {
         Debug.Log("Damage recived, sent by " + enemy);
         Debug.Log("Before damage, Health:" + health);
-        health -= enemy.GetComponent<LREnemy>().getDamage();
-        Debug.Log("After damage taken, Health:" + health);
-        // iframe stuff
+
+        if (InvSec >= maxInvSec)
+        {
+            health -= enemy.GetComponent<LREnemy>().getDamage();
+            Debug.Log("After damage taken, Health:" + health);
+            // iframe stuff
+            InvSec = 0;
+        }
+        else
+        {
+            Debug.Log("didnt take damage, still invincible");
+        }
+
+        
 
 
 
