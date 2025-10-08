@@ -283,6 +283,7 @@ TextureImporter:
       physicsShape:
       - - {x: 8, y: 8}
         - {x: 2, y: 8}
+        - {x: -3, y: 3}
         - {x: -8, y: -2}
         - {x: -8, y: -8}
         - {x: 8, y: -8}
@@ -314,6 +315,7 @@ TextureImporter:
         - {x: 8, y: -8}
       physicsShape:
       - - {x: 8, y: -2}
+        - {x: 3, y: 3}
         - {x: -2, y: 8}
         - {x: -8, y: 8}
         - {x: -8, y: -8}

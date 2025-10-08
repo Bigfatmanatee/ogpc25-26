@@ -135,6 +135,10 @@ public class Player : MonoBehaviour
         {
             rb.gravityScale = 2f; //was 1.75
         }
+        else if (isGrounded() && !jumping)
+        {
+            rb.linearVelocityY *= 0.95f;
+        }
         else
         {
             rb.gravityScale = 1f;
@@ -144,6 +148,7 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
+        
         rb.linearVelocity = new Vector2(m_PlayerMovement.x * speed, rb.linearVelocity.y);
         
         if (rb.linearVelocityX > 0) //Facing direction

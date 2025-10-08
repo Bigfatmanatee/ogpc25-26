@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Camera : MonoBehaviour
+public class CameraFl : MonoBehaviour
 {
     [SerializeField] Transform followPos;
     [SerializeField] float speed;
