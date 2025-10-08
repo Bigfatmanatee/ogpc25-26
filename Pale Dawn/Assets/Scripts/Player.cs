@@ -20,6 +20,7 @@ public class Player : MonoBehaviour
     [SerializeField] private Collider2D hitBox;
     [SerializeField] private Collider2D attHitBox;
     [SerializeField] private Transform groundCheck;
+    [SerializeField] private Transform stairCheck;
 
 
     [SerializeField] private float speed;
@@ -91,6 +92,10 @@ public class Player : MonoBehaviour
     {
         return Physics2D.OverlapCircle(groundCheck.position, 0.2f, LmG);
     }
+    private bool isOnStair()
+    {
+        return Physics2D.OverlapCircle(stairCheck.position, 0.2f, LmG);
+    }
 
     private void Update()
     {
@@ -128,7 +133,7 @@ public class Player : MonoBehaviour
         }
         if (!isGrounded() && !jumping) //falling without holding space
         {
-            rb.gravityScale = 1.75f;
+            rb.gravityScale = 2f; //was 1.75
         }
         else
         {
@@ -140,6 +145,7 @@ public class Player : MonoBehaviour
     private void FixedUpdate()
     {
         rb.linearVelocity = new Vector2(m_PlayerMovement.x * speed, rb.linearVelocity.y);
+        
         if (rb.linearVelocityX > 0) //Facing direction
         {
             transform.eulerAngles = new Vector3(0, 0, 0); // Normal
@@ -179,11 +185,6 @@ public class Player : MonoBehaviour
         {
             Debug.Log("didnt take damage, still invincible");
         }
-
-        
-
-
-
     }
 
     public int getDamage() {
