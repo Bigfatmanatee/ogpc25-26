@@ -52,7 +52,7 @@ public class LREnemy : MonoBehaviour
     {
         if (sinceLastAtt >= attCooldown && shouldSwing)
         {
-            Debug.Log("Running swing function");
+            // Debug.Log("Running swing function");
             StartCoroutine(swing());
             sinceLastAtt = -attTime;
         }
@@ -68,7 +68,7 @@ public class LREnemy : MonoBehaviour
         yield return new WaitForSeconds(attTime); //should match animation
         if (shouldSwing && target.GetComponent<Player>() != null)
         {
-            Debug.Log("sending damage to " + target);
+            // Debug.Log("sending damage to " + target);
             target.GetComponent<Player>().damage(this.gameObject);
         }
     }
@@ -106,14 +106,14 @@ public class LREnemy : MonoBehaviour
     {
         if (enter)
         {
-            Debug.Log("Layer " + getTarget() + " detected entering att hitbox");
+            // Debug.Log("Layer " + getTarget() + " detected entering att hitbox");
             shouldSwing = true;
             target = gObject.GetComponent<HitboxPass>().passHost();
-            Debug.Log("Target saved as " + target);
+            // Debug.Log("Target saved as " + target);
         }
         else
         {
-            Debug.Log("Layer " + getTarget() + " detected exiting att hitbox");
+            // Debug.Log("Layer " + getTarget() + " detected exiting att hitbox");
             shouldSwing = false;
             target = null;
         }
@@ -121,8 +121,8 @@ public class LREnemy : MonoBehaviour
     }
     public void damage(GameObject player)
     {
-        Debug.Log("Damage recived, sent by " + player);
-        Debug.Log("Before damage, Health:" + health);
+        // Debug.Log("Damage recived, sent by " + player);
+        // Debug.Log("Before damage, Health:" + health);
 
         if (InvSec >= maxInvSec)
         {

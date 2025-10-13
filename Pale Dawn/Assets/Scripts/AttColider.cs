@@ -36,6 +36,10 @@ public class AttColider : MonoBehaviour
             }
 
         }
+        // else if (hostIsPlayer && collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
+        // {
+        //     Host.GetComponent<Player>().spark();
+        // }
     }
     void OnTriggerExit2D(Collider2D collision)
     {

@@ -19,8 +19,9 @@ public class Player : MonoBehaviour
 
     [SerializeField] private Collider2D hitBox;
     [SerializeField] private Collider2D attHitBox;
+    [SerializeField] private Collider2D attHitBoxU;
+    [SerializeField] private Collider2D attHitBoxD;
     [SerializeField] private Transform groundCheck;
-    [SerializeField] private Transform stairCheck;
 
 
     [SerializeField] private float speed;
@@ -34,6 +35,11 @@ public class Player : MonoBehaviour
 
 
 
+
+    [SerializeField] private float deadzone = 0.2f; //deadzone % (between 0.0 - 1.0) 
+
+
+
     private void Start()
     {
         health = maxHealth;
@@ -43,8 +49,12 @@ public class Player : MonoBehaviour
         LmA = LayerMask.GetMask("Attack");
 
         attHitBox.enabled = false;
+        attHitBoxU.enabled = false;
+        attHitBoxD.enabled = false;
         // attHitBox.GetComponent<AttColider>().isPlayer();
         attHitBox.GetComponent<AttColider>().setLayerName("EnemyHit");
+        attHitBoxU.GetComponent<AttColider>().setLayerName("EnemyHit");
+        attHitBoxD.GetComponent<AttColider>().setLayerName("EnemyHit");
 
 
         m_MoveAction = new InputAction("Move");
@@ -91,10 +101,6 @@ public class Player : MonoBehaviour
     private bool isGrounded()
     {
         return Physics2D.OverlapCircle(groundCheck.position, 0.2f, LmG);
-    }
-    private bool isOnStair()
-    {
-        return Physics2D.OverlapCircle(stairCheck.position, 0.2f, LmG);
     }
 
     private void Update()
@@ -163,9 +169,33 @@ public class Player : MonoBehaviour
 
     private IEnumerator swing()
     {
-        attHitBox.enabled = true;
+        if (m_PlayerMovement.y > deadzone)
+        {
+            attHitBoxU.enabled = true;
+            Debug.DrawLine(transform.position, transform.position + new Vector3(0, 1, 0), Color.aliceBlue, swingTime);
+        }
+        else if (m_PlayerMovement.y < -deadzone)
+        {
+            attHitBoxD.enabled = true;
+            Debug.DrawLine(transform.position, transform.position + new Vector3(0, -1, 0), Color.aliceBlue, swingTime);
+        }
+        else
+        {
+            attHitBox.enabled = true;
+            if (transform.eulerAngles.y == 0)
+            {
+                Debug.DrawLine(transform.position, transform.position + new Vector3(1, 0, 0), Color.aliceBlue, swingTime);
+            }
+            else
+            {
+                Debug.DrawLine(transform.position, transform.position + new Vector3(-1, 0, 0), Color.aliceBlue, swingTime);
+            }
+            
+        }
         yield return new WaitForSeconds(swingTime);
         attHitBox.enabled = false;
+        attHitBoxU.enabled = false;
+        attHitBoxD.enabled = false;
     }
     public void attack(GameObject enemy)
     {
@@ -173,11 +203,18 @@ public class Player : MonoBehaviour
         var Host = enemy.GetComponent<HitboxPass>().passHost();
         Host.GetComponent<LREnemy>().damage(this.gameObject);
     }
+    public void spark()
+    {
+        // if (m_PlayerMovement.y > deadzone)
+
+
+        //raycast in directing of swing, if it hits a wall then spawn sparks at collision point
+    }
 
     public void damage(GameObject enemy)
     {
-        Debug.Log("Damage recived, sent by " + enemy);
-        Debug.Log("Before damage, Health:" + health);
+        // Debug.Log("Damage recived, sent by " + enemy);
+        // Debug.Log("Before damage, Health:" + health);
 
         if (InvSec >= maxInvSec)
         {
