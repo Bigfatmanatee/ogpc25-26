@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 90b7fdb2c1c122f41a01e01d43b84b7c
+guid: d83d0e2bcfe650544a1b8bcf4c6c4aa4
 TextureImporter:
   internalIDToNameTable:
   - first:
@@ -113,23 +113,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: torch_0
+      name: torch 1_0
       rect:
         serializedVersion: 2
-        x: 115
-        y: 8
-        width: 90
-        height: 228
+        x: 118
+        y: 10
+        width: 60
+        height: 120
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: ae1c0074a52683860800000000000000
-      internalID: 7509860518518112746
+      spriteID: c2333284c9ecb0641bd20d3feab09451
+      internalID: 1895612275
       vertices: []
       indices: 
       edges: []
@@ -146,9 +146,11 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
-      entries: []
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":64.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":0,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      torch_0: 7509860518518112746
+      torch 1_0: 1895612275
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
