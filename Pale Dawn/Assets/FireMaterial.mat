@@ -23,7 +23,7 @@ Material:
   m_Name: FireMaterial
   m_Shader: {fileID: -6465566751694194690, guid: f27fe48218e64864d90392516802d57e, type: 3}
   m_Parent: {fileID: -876546973899608171, guid: f27fe48218e64864d90392516802d57e, type: 3}
-  m_ModifiedSerializedProperties: 0
+  m_ModifiedSerializedProperties: 4
   m_ValidKeywords: []
   m_InvalidKeywords: []
   m_LightmapFlags: 4

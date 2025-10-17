@@ -36,7 +36,7 @@ public class Player : MonoBehaviour
 
 
 
-    [SerializeField] private float deadzone = 0.2f; //deadzone % (between 0.0 - 1.0) 
+    [SerializeField] private float deadzone = 0.4f; //deadzone % (between 0.0 - 1.0) 
 
 
 
@@ -174,7 +174,7 @@ public class Player : MonoBehaviour
             attHitBoxU.enabled = true;
             Debug.DrawLine(transform.position, transform.position + new Vector3(0, 1, 0), Color.aliceBlue, swingTime);
         }
-        else if (m_PlayerMovement.y < -deadzone)
+        else if (m_PlayerMovement.y < -deadzone) //deadzone not fully working, is it based off velocity?
         {
             attHitBoxD.enabled = true;
             Debug.DrawLine(transform.position, transform.position + new Vector3(0, -1, 0), Color.aliceBlue, swingTime);
