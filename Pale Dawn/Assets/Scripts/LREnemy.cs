@@ -23,6 +23,7 @@ public class LREnemy : MonoBehaviour
     [SerializeField] private Collider2D attHitBox;
     [SerializeField] private Transform wallCheck;
     [SerializeField] private Transform groundCheck;
+    [SerializeField] private Animator anim;
     private int direction = 1;
     private Rigidbody2D rb;
     private LayerMask LmG;
@@ -46,6 +47,10 @@ public class LREnemy : MonoBehaviour
             attack();
         }
         InvSec += Time.deltaTime;
+        if (health <= 0)
+        {
+            die();
+        }
     }
 
     private void attack()
@@ -65,12 +70,14 @@ public class LREnemy : MonoBehaviour
     private IEnumerator swing()
     {
         //play animation
+        anim.SetBool("attacking", true);
         yield return new WaitForSeconds(attTime); //should match animation
         if (shouldSwing && target.GetComponent<Player>() != null)
         {
             // Debug.Log("sending damage to " + target);
             target.GetComponent<Player>().damage(this.gameObject);
         }
+        anim.SetBool("attacking", false);
     }
 
 
@@ -145,5 +152,9 @@ public class LREnemy : MonoBehaviour
     public int getDamage()
     {
         return damageNum;
+    }
+    public void die()
+    {
+        Destroy(gameObject);
     }
 }

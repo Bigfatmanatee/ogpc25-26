@@ -33,7 +33,7 @@ public class Player : MonoBehaviour
     [SerializeField] private float maxInvSec;
     private float InvSec = 0;
 
-
+    [SerializeField] private GameObject[] HealthBar; 
 
 
     [SerializeField] private float deadzone = 0.4f; //deadzone % (between 0.0 - 1.0) 
@@ -218,9 +218,9 @@ public class Player : MonoBehaviour
 
         if (InvSec >= maxInvSec)
         {
+            HealthBar[health - 1].GetComponent<Health>().FireOff();
             health -= enemy.GetComponent<LREnemy>().getDamage();
             Debug.Log("After damage taken, Health:" + health);
-            // iframe stuff
             InvSec = 0;
         }
         else
