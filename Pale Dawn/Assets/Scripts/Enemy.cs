@@ -1,0 +1,195 @@
+using System;
+using System.Collections;
+using UnityEngine;
+
+public class Enemy : MonoBehaviour
+{
+    // [SerializeField] private int movementPattern = 1; //1=left & right
+    [SerializeField] protected float speed = 5;
+    [SerializeField] protected int maxHealth = 5;
+    [SerializeField] protected int health = 5;
+    [SerializeField] protected int damageNum = 1;
+
+    [SerializeField] private float attTime;
+    [SerializeField] private float attCooldown;
+    [SerializeField] private float maxInvSec;
+    private float sinceLastAtt;
+    private GameObject target;
+    private float InvSec = 0;
+    private bool shouldSwing;
+
+
+
+    [SerializeField] private Collider2D attHitBox;
+    [SerializeField] private Transform wallCheck;
+    [SerializeField] private Transform groundCheck;
+    [SerializeField] private Animator anim;
+    [SerializeField] private int direction = 1;
+    protected Rigidbody2D rb;
+    private LayerMask LmG;
+    void Start()
+    {
+        health = maxHealth;
+        LmG = LayerMask.GetMask("Ground");
+        rb = GetComponent<Rigidbody2D>();
+        health = maxHealth;
+        ExtraStart();
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        move();
+        InvSec += Time.deltaTime;
+        if (health <= 0)
+        {
+            die();
+        }
+        ExtraUpdate();
+    }
+
+    protected void attack()
+    {
+        if (sinceLastAtt >= attCooldown && shouldSwing)
+        {
+            // Debug.Log("Running swing function");
+            StartCoroutine(swing());
+            sinceLastAtt = -attTime;
+        }
+        else
+        {
+            sinceLastAtt += Time.deltaTime;
+        }
+    }
+
+    protected IEnumerator swing()
+    {
+        //play animation
+        anim.SetBool("attacking", true);
+        yield return new WaitForSeconds(attTime); //should match animation
+        if (shouldSwing && target.GetComponent<Player>() != null)
+        {
+            // Debug.Log("sending damage to " + target);
+            target.GetComponent<Player>().damage(this.gameObject);
+        }
+        anim.SetBool("attacking", false);
+    }
+
+
+    protected virtual void FixedUpdate()
+    {
+        if (!shouldSwing)
+        {
+            rb.linearVelocity = new Vector2(speed * direction, rb.linearVelocity.y);
+        }
+        else
+        {
+            rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
+        }
+
+        if (rb.linearVelocityX > 0) //Facing direction
+        {
+            transform.eulerAngles = new Vector3(0, 0, 0); // Normal
+        }
+        else if (rb.linearVelocityX < 0)
+        {
+            transform.eulerAngles = new Vector3(0, 180, 0); // Flipped
+        }
+    }
+    protected bool checkForWall()
+    {
+        return Physics2D.OverlapCircle(wallCheck.position, 0.2f, LmG);
+    }
+    protected bool checkForFloor()
+    {
+        return Physics2D.OverlapCircle(groundCheck.position, 0.5f, LmG);
+    } //make a second function using raycasts to check directly under
+    public void trigger(bool enter, GameObject gObject)
+    {
+        if (enter)
+        {
+            // Debug.Log("Layer " + getTarget() + " detected entering att hitbox");
+            shouldSwing = true;
+            target = gObject.GetComponent<HitboxPass>().passHost();
+            // Debug.Log("Target saved as " + target);
+        }
+        else
+        {
+            // Debug.Log("Layer " + getTarget() + " detected exiting att hitbox");
+            shouldSwing = false;
+            target = null;
+        }
+
+    }
+    public void damage(GameObject player)
+    {
+        // Debug.Log("Damage recived, sent by " + player);
+        // Debug.Log("Before damage, Health:" + health);
+
+        if (InvSec >= maxInvSec)
+        {
+            health -= player.GetComponent<Player>().getDamage();
+            Debug.Log("After damage taken, Health:" + health);
+            //play Iframe animation
+            InvSec = 0;
+        }
+        else
+        {
+            Debug.Log("didnt take damage, still invincible");
+        }
+
+
+    }
+    public float getSpeed()
+    {
+        return speed;
+    }
+    public bool getShouldSwing()
+    {
+        return shouldSwing;
+    }
+    protected void toggleDirection()
+    {
+        direction *= -1;
+    }
+    protected void setDirection(int a) //should be 1 or -1
+    {
+        direction = a;
+    }
+    protected void addDirection()
+    {
+        direction++;
+    }
+    protected void addDirection(int a)
+    {
+        direction += a;   
+    }
+    public int getDirection()
+    {
+        return direction;
+    }
+    public string getTarget()
+    {
+        return "Player";
+    }
+    public int getDamage()
+    {
+        return damageNum;
+    }
+    public void die()
+    {
+        Destroy(gameObject);
+    }
+    protected virtual void move()
+    {
+        throw new NotImplementedException();
+    }
+    protected virtual void ExtraStart()
+    {
+        Debug.Log("no extra start commands");
+    }
+    protected virtual void ExtraUpdate()
+    {
+        // Debug.Log("no extra update commands");
+    }
+}
