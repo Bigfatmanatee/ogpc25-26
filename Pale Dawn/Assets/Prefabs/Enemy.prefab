@@ -61,7 +61,9 @@ MonoBehaviour:
   attHitBox: {fileID: 3646600657789621742}
   wallCheck: {fileID: 7353280151129298492}
   groundCheck: {fileID: 4276567798635332129}
+  sprite: {fileID: 2761803399495359900}
   anim: {fileID: 3775560129083385759}
+  direction: 1
 --- !u!61 &6785075840298546309
 BoxCollider2D:
   m_ObjectHideFlags: 0

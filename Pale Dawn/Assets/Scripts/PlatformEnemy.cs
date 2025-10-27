@@ -7,10 +7,15 @@ public class PlatformEnemy : Enemy
     //maybe change to be a follow a track design?
     float pausetime = 0;
     float maxPausetime = 0.3f;
+    [SerializeField] int facing = -1;
     [SerializeField] Transform rotatePos;
     protected override void ExtraStart()
     {
         rb.gravityScale = 0;
+        if (facing > 0)
+        {
+            transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+        }
     }
     protected override void ExtraUpdate()
     {
@@ -46,13 +51,28 @@ public class PlatformEnemy : Enemy
     }
     protected override void move()
     {
+        if (checkForWall())
+        {
+            //add code for 90 degree inwards angles
+        }
         if (!raycastForFloor() && pausetime > maxPausetime)
         {
-            addDirection();
-            transform.RotateAround(rotatePos.transform.position, Vector3.forward, -90);
+            if (facing > 0)
+            {
+                addDirection(-1);
+            }
+            else if (facing < 0)
+            {
+                addDirection(1);
+            }
+            
+            transform.RotateAround(rotatePos.transform.position, Vector3.forward, 90*facing);
             if (getDirection() > 4)
             {
                 setDirection(1);
+            } else if (getDirection() < 1)
+            {
+                setDirection(4);
             }
             pausetime = 0;
         }
@@ -64,25 +84,26 @@ public class PlatformEnemy : Enemy
             // Debug.Log("platform enemy direction:"+getDirection());
             if (getDirection() == 1)
             {
-                rb.linearVelocity = new Vector2(speed, 0);
+                rb.linearVelocity = new Vector2(speed*facing*-1, 0);
             }
             else if (getDirection() == 2)
             {
-                rb.linearVelocity = new Vector2(0, speed*-1);
+                rb.linearVelocity = new Vector2(0, speed*facing);
             }
             else if (getDirection() == 3)
             {
-                rb.linearVelocity = new Vector2(speed*-1, 0);
+                rb.linearVelocity = new Vector2(speed*facing, 0);
             }
             else if (getDirection() == 4)
             {
-                rb.linearVelocity = new Vector2(0, speed);
+                rb.linearVelocity = new Vector2(0, speed*-1*facing);
             }
             
         }
         else
         {
             rb.linearVelocity = new Vector2(0, 0);
+            attack();
         }
 
         

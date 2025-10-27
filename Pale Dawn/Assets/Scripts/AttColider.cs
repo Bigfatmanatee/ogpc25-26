@@ -11,7 +11,7 @@ public class AttColider : MonoBehaviour
     {
         if (!hostIsPlayer)
         {
-            layerName = Host.GetComponent<LREnemy>().getTarget();
+            layerName = Host.GetComponent<Enemy>().getTarget();
         }
     }
 
@@ -32,7 +32,7 @@ public class AttColider : MonoBehaviour
             }
             else
             {
-                Host.GetComponent<LREnemy>().trigger(true, collision.gameObject);
+                Host.GetComponent<Enemy>().trigger(true, collision.gameObject);
             }
 
         }
@@ -47,7 +47,7 @@ public class AttColider : MonoBehaviour
         {
             if (!hostIsPlayer)
             {
-                Host.GetComponent<LREnemy>().trigger(false, collision.gameObject);
+                Host.GetComponent<Enemy>().trigger(false, collision.gameObject);
             }
         }
     }

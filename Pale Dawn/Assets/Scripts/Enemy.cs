@@ -23,6 +23,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private Collider2D attHitBox;
     [SerializeField] protected Transform wallCheck;
     [SerializeField] protected Transform groundCheck;
+    [SerializeField] protected GameObject sprite;
     [SerializeField] protected Animator anim;
     [SerializeField] private int direction = 1;
     protected Rigidbody2D rb;

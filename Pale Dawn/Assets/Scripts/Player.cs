@@ -201,7 +201,7 @@ public class Player : MonoBehaviour
     {
         //this has access to enemy hitbox gameobject, create another script to pass through damage
         var Host = enemy.GetComponent<HitboxPass>().passHost();
-        Host.GetComponent<LREnemy>().damage(this.gameObject);
+        Host.GetComponent<Enemy>().damage(this.gameObject);
     }
     public void spark()
     {
@@ -219,7 +219,7 @@ public class Player : MonoBehaviour
         if (InvSec >= maxInvSec)
         {
             HealthBar[health - 1].GetComponent<Health>().FireOff();
-            health -= enemy.GetComponent<LREnemy>().getDamage();
+            health -= enemy.GetComponent<Enemy>().getDamage();
             Debug.Log("After damage taken, Health:" + health);
             InvSec = 0;
         }

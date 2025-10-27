@@ -6,13 +6,13 @@ public class LREnemy : Enemy
 {
     protected override void move()
     {
-        if (base.checkForWall() || !base.checkForFloor())
+        if (checkForWall() || !checkForFloor())
         {
-            base.toggleDirection();
+            toggleDirection();
         }
         else
         {
-            base.attack();
+            attack();
         }
     }
 
