@@ -21,12 +21,12 @@ public class Enemy : MonoBehaviour
 
 
     [SerializeField] private Collider2D attHitBox;
-    [SerializeField] private Transform wallCheck;
-    [SerializeField] private Transform groundCheck;
-    [SerializeField] private Animator anim;
+    [SerializeField] protected Transform wallCheck;
+    [SerializeField] protected Transform groundCheck;
+    [SerializeField] protected Animator anim;
     [SerializeField] private int direction = 1;
     protected Rigidbody2D rb;
-    private LayerMask LmG;
+    protected LayerMask LmG;
     void Start()
     {
         health = maxHealth;
@@ -104,6 +104,11 @@ public class Enemy : MonoBehaviour
     {
         return Physics2D.OverlapCircle(groundCheck.position, 0.5f, LmG);
     } //make a second function using raycasts to check directly under
+    protected virtual bool raycastForFloor()
+    {
+        RaycastHit2D hit = Physics2D.Raycast(groundCheck.position, Vector2.down, 1f, LmG);
+        return hit;
+    }
     public void trigger(bool enter, GameObject gObject)
     {
         if (enter)
