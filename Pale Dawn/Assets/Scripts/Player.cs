@@ -110,18 +110,19 @@ public class Player : MonoBehaviour
         //if (m_PlayerMovement != Vector2.zero)
         //    Debug.Log("Vector = " + m_PlayerMovement);
 
-        Vector3 dir = new Vector3(1,0,0);
+        float dist = 1.8f;
+        Vector3 dir = new Vector3(dist,0,0);
         if (transform.eulerAngles.y != 0)
         {
-            dir = new Vector3(-1, 0, 0);
+            dir = new Vector3(-dist, 0, 0);
         }
         if (m_PlayerMovement.y > deadzone)
         {
-            dir = new Vector3(0, 1, 0);
+            dir = new Vector3(0, dist, 0);
         }
         else if (m_PlayerMovement.y < -deadzone)
         {
-            dir = new Vector3(0, -1, 0);
+            dir = new Vector3(0, -dist, 0);
         }
         Color c = Color.aliceBlue;
         if (isSwinging)

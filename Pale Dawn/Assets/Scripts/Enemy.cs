@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    // [SerializeField] private int movementPattern = 1; //1=left & right
     [SerializeField] protected float speed = 5;
     [SerializeField] protected int maxHealth = 5;
     [SerializeField] protected int health = 5;
