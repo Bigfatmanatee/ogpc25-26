@@ -371,11 +371,12 @@ MonoBehaviour:
   groundCheck: {fileID: 5659316210615448996}
   speed: 7.5
   jumpPower: 7.5
-  maxHealth: 5
+  maxHealth: 3
   health: 0
   swingTime: 0.75
   swingCooldown: 1
   maxInvSec: 0
+  HealthBar: []
   deadzone: 0.2
 --- !u!50 &824300097569937476
 Rigidbody2D:

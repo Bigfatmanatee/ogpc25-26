@@ -32,6 +32,7 @@ public class Player : MonoBehaviour
     [SerializeField] private float swingCooldown;
     [SerializeField] private float maxInvSec;
     private float InvSec = 0;
+    private bool isSwinging = false;
 
     [SerializeField] private GameObject[] HealthBar; 
 
@@ -109,6 +110,26 @@ public class Player : MonoBehaviour
         //if (m_PlayerMovement != Vector2.zero)
         //    Debug.Log("Vector = " + m_PlayerMovement);
 
+        Vector3 dir = new Vector3(1,0,0);
+        if (transform.eulerAngles.y != 0)
+        {
+            dir = new Vector3(-1, 0, 0);
+        }
+        if (m_PlayerMovement.y > deadzone)
+        {
+            dir = new Vector3(0, 1, 0);
+        }
+        else if (m_PlayerMovement.y < -deadzone)
+        {
+            dir = new Vector3(0, -1, 0);
+        }
+        Color c = Color.aliceBlue;
+        if (isSwinging)
+        {
+            c = Color.darkRed;
+        }
+        Debug.DrawLine(transform.position, transform.position + dir, c, 0.005f);
+
         var attacking = m_AttackAction.ReadValue<float>(); //temp attack code
         if (m_AttackAction.WasPressedThisFrame() && sinceLastSwing >= swingCooldown)
         {
@@ -169,39 +190,41 @@ public class Player : MonoBehaviour
 
     private IEnumerator swing()
     {
+        isSwinging = true;
         if (m_PlayerMovement.y > deadzone)
         {
             attHitBoxU.enabled = true;
-            Debug.DrawLine(transform.position, transform.position + new Vector3(0, 1, 0), Color.aliceBlue, swingTime);
+            // Debug.DrawLine(transform.position, transform.position + new Vector3(0, 1, 0), Color.aliceBlue, swingTime);
         }
         else if (m_PlayerMovement.y < -deadzone) //deadzone not fully working, is it based off velocity?
         {
             attHitBoxD.enabled = true;
-            Debug.DrawLine(transform.position, transform.position + new Vector3(0, -1, 0), Color.aliceBlue, swingTime);
+            // Debug.DrawLine(transform.position, transform.position + new Vector3(0, -1, 0), Color.aliceBlue, swingTime);
         }
         else
         {
             attHitBox.enabled = true;
-            if (transform.eulerAngles.y == 0)
-            {
-                Debug.DrawLine(transform.position, transform.position + new Vector3(1, 0, 0), Color.aliceBlue, swingTime);
-            }
-            else
-            {
-                Debug.DrawLine(transform.position, transform.position + new Vector3(-1, 0, 0), Color.aliceBlue, swingTime);
-            }
+            // if (transform.eulerAngles.y == 0)
+            // {
+            //     Debug.DrawLine(transform.position, transform.position + new Vector3(1, 0, 0), Color.aliceBlue, swingTime);
+            // }
+            // else
+            // {
+            //     Debug.DrawLine(transform.position, transform.position + new Vector3(-1, 0, 0), Color.aliceBlue, swingTime);
+            // }
             
         }
         yield return new WaitForSeconds(swingTime);
         attHitBox.enabled = false;
         attHitBoxU.enabled = false;
         attHitBoxD.enabled = false;
+        isSwinging = false;
     }
     public void attack(GameObject enemy)
     {
         //this has access to enemy hitbox gameobject, create another script to pass through damage
         var Host = enemy.GetComponent<HitboxPass>().passHost();
-        Host.GetComponent<Enemy>().damage(this.gameObject);
+        Host.GetComponent<Enemy>().damage(gameObject);
     }
     public void spark()
     {

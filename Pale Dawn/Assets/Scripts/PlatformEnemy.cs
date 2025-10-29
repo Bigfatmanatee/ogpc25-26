@@ -1,12 +1,18 @@
+using Unity.Mathematics;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class PlatformEnemy : Enemy
 {
     // changes direction to be 1-4, in order right, down, left, up
     //maybe change to be a follow a track design?
-    float pausetime = 0;
-    float maxPausetime = 0.3f;
+    // float pausetime = 0;
+    // float maxPausetime = 0.3f;
+    bool paused;
+    float resetTimer = 0;
+    float maxResetTime = 1;
+    Vector2 start;
     [SerializeField] int facing = -1;
     [SerializeField] Transform rotatePos;
     protected override void ExtraStart()
@@ -16,10 +22,11 @@ public class PlatformEnemy : Enemy
         {
             transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
         }
+        start = gameObject.transform.position;
     }
     protected override void ExtraUpdate()
     {
-        pausetime += Time.deltaTime;
+        // pausetime += Time.deltaTime;
     }
     protected Vector2 DirToVector(int a) //down from facing direction
     {
@@ -55,7 +62,7 @@ public class PlatformEnemy : Enemy
         {
             //add code for 90 degree inwards angles
         }
-        if (!raycastForFloor() && pausetime > maxPausetime)
+        if (!raycastForFloor() && !paused)
         {
             if (facing > 0)
             {
@@ -65,16 +72,35 @@ public class PlatformEnemy : Enemy
             {
                 addDirection(1);
             }
+
+            transform.RotateAround(rotatePos.transform.position, Vector3.forward, 90 * facing);
             
-            transform.RotateAround(rotatePos.transform.position, Vector3.forward, 90*facing);
             if (getDirection() > 4)
             {
                 setDirection(1);
-            } else if (getDirection() < 1)
+            }
+            else if (getDirection() < 1)
             {
                 setDirection(4);
             }
-            pausetime = 0;
+            paused = true;
+        }
+        else if (raycastForFloor() && paused)
+        {
+            paused = false;
+        }
+        else if (!raycastForFloor() && paused)
+        {
+            resetTimer += Time.deltaTime;
+            if (resetTimer >= maxResetTime)
+            {
+                setDirection(1);
+                gameObject.transform.rotation = new quaternion(0,0,0,0);
+                gameObject.transform.position = start;
+                resetTimer = 0;
+                paused = false;
+                Debug.Log("Direction: " + getDirection());
+            }
         }
     }
     protected override void FixedUpdate()
