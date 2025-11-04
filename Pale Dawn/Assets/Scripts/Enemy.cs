@@ -191,7 +191,7 @@ public class Enemy : MonoBehaviour
     }
     protected virtual void ExtraStart()
     {
-        Debug.Log("no extra start commands");
+        // Debug.Log("no extra start commands");
     }
     protected virtual void ExtraUpdate()
     {
