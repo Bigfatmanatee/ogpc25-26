@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using Unity.VisualScripting;
 using UnityEditor;
@@ -34,7 +35,8 @@ public class Player : MonoBehaviour
     private float InvSec = 0;
     private bool isSwinging = false;
 
-    [SerializeField] private GameObject[] HealthBar; 
+    [SerializeField] private GameObject[] HealthBar;
+    [SerializeField] private Animator swingAnimator;
 
 
     [SerializeField] private float deadzone = 0.4f; //deadzone % (between 0.0 - 1.0) 
@@ -191,6 +193,13 @@ public class Player : MonoBehaviour
 
     private IEnumerator swing()
     {
+        print("swing animation playing");
+        swingAnimator.ResetTrigger("Swing");
+        swingAnimator.SetTrigger("Swing");
+
+        //playing the particles
+        swingAnimator.transform.GetChild(0).GetComponent<ParticleSystem>().Emit(55);
+
         isSwinging = true;
         if (m_PlayerMovement.y > deadzone)
         {
