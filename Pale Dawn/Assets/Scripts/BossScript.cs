@@ -1,13 +1,14 @@
 using System;
 using System.Collections;
+using System.Linq;
 using UnityEngine;
 
 
 public class BossScript : MonoBehaviour
 {
+    [Header("Movement stats")]
     [SerializeField] float speed;
     [SerializeField] float ylevel;
-    [SerializeField] GameObject[] IdleFollow;
     [SerializeField] float TAthreshhold;
     int curNode = 0;
     float height;
@@ -15,13 +16,22 @@ public class BossScript : MonoBehaviour
     float temp;
     bool isIdle;
     float moveTimer = 0;
+    bool goingToNode = false;
     string[] Abilities = new string[5];
     string nextMove = null;
+    [Header("Time between moves")]
     [SerializeField] float moveTimeBase;
     [SerializeField] float moveTimeVarience;
+
+    [Header("Position Nodes")]
+    [SerializeField] Transform floorCheckPos;
+    [SerializeField] GameObject[] IdleFollow;
+    [SerializeField] Transform[] ability1Nodes;
     float hTime;
+    LayerMask LmG;
     void Start()
-    { //change strings to function names
+    {
+        LmG = LayerMask.GetMask("Ground");
         Abilities[0] = "Ability1";
         Abilities[1] = "Ability2";
         Abilities[2] = "Ability3";
@@ -60,7 +70,8 @@ public class BossScript : MonoBehaviour
                 StartCoroutine(nextMove);
             }
             moveTimer = moveTimeBase + UnityEngine.Random.Range(-moveTimeVarience, moveTimeVarience);
-            nextMove = Abilities[UnityEngine.Random.Range(0, 5)];
+            // nextMove = Abilities[UnityEngine.Random.Range(0, Abilities.Count())];
+            nextMove = "Ability1"; //test specific move
             Debug.Log("Timer: " + moveTimer + ", next move: " + nextMove);
         }
         else
@@ -106,10 +117,25 @@ public class BossScript : MonoBehaviour
     //  -position for next attack (make move timer very low)
 
 
-    private IEnumerator Ability1()
+    private IEnumerator Ability1() //slam
     {
-        Debug.Log("Ability 1");
+        Debug.Log("Ability 1: slam");
+        StartCoroutine(MoveToNode(ability1Nodes[0].position,0.2f));
+        yield return new WaitUntil(() => !goingToNode);
+        yield return new WaitForSeconds(0.1f);
+        StartCoroutine(MoveToNode(ability1Nodes[1].position, 0.5f));
+        yield return new WaitUntil(() => !goingToNode);
+        yield return new WaitForSeconds(0.2f);
+        // yield return new WaitForSeconds(1f);
+        RaycastHit2D hit = Physics2D.Raycast(floorCheckPos.position, new Vector2(0, -20), 40, LmG);
+        Debug.Log("Hit position:" + hit.point);
+        Debug.DrawLine(transform.position, hit.point, Color.azure, 2f);
+        float yDist = Vector2.Distance(floorCheckPos.position, hit.point);
+        StartCoroutine(MoveToNode(hit.point, yDist / 5));
+        yield return new WaitUntil(() => !goingToNode);
         yield return new WaitForSeconds(1f);
+        // big hitbox area (maybe sliding floor projectiles?)
+        // return to flight path
         isIdle = true;
     }
     private IEnumerator Ability2()
@@ -135,6 +161,20 @@ public class BossScript : MonoBehaviour
         Debug.Log("Ability 5");
         yield return new WaitForSeconds(1f);
         isIdle = true;
+    }
+
+
+    private IEnumerator MoveToNode(Vector2 endPos, float speed)
+    {
+        goingToNode = true;
+        float distPos = Vector2.Distance(transform.position,endPos);
+        for (int i = 0; distPos > 1f; i++)
+        {
+            transform.position = Vector2.MoveTowards(transform.position, endPos, speed);
+            distPos = Vector2.Distance(transform.position, endPos);
+            yield return new WaitForFixedUpdate();
+        }
+        goingToNode = false;
     }
     
 }
