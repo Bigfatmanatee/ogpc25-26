@@ -9,22 +9,22 @@ public class Enemy : MonoBehaviour
     [SerializeField] protected int health = 5;
     [SerializeField] protected int damageNum = 1;
 
-    [SerializeField] private float attTime;
-    [SerializeField] private float attCooldown;
-    [SerializeField] private float maxInvSec;
-    private float sinceLastAtt;
-    private GameObject target;
-    private float InvSec = 0;
-    private bool shouldSwing;
+    [SerializeField] protected float attTime;
+    [SerializeField] protected float attCooldown;
+    [SerializeField] protected float maxInvSec;
+    protected float sinceLastAtt;
+    protected GameObject target;
+    protected float InvSec = 0;
+    protected bool shouldSwing;
 
 
 
-    [SerializeField] private Collider2D attHitBox;
+    [SerializeField] protected Collider2D attHitBox;
     [SerializeField] protected Transform wallCheck;
     [SerializeField] protected Transform groundCheck;
     [SerializeField] protected GameObject sprite;
     [SerializeField] protected Animator anim;
-    [SerializeField] private int direction = 1;
+    [SerializeField] protected int direction = 1;
     protected Rigidbody2D rb;
     protected LayerMask LmG;
     void Start()
@@ -48,7 +48,7 @@ public class Enemy : MonoBehaviour
         ExtraUpdate();
     }
 
-    protected void attack()
+    protected virtual void attack()
     {
         if (sinceLastAtt >= attCooldown && shouldSwing)
         {
@@ -62,7 +62,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    protected IEnumerator swing()
+    protected virtual IEnumerator swing()
     {
         //play animation
         anim.SetBool("attacking", true);

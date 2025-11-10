@@ -19,6 +19,7 @@ public class BossScript : MonoBehaviour
     bool goingToNode = false;
     string[] Abilities = new string[5];
     string nextMove = null;
+
     [Header("Time between moves")]
     [SerializeField] float moveTimeBase;
     [SerializeField] float moveTimeVarience;
@@ -27,6 +28,9 @@ public class BossScript : MonoBehaviour
     [SerializeField] Transform floorCheckPos;
     [SerializeField] GameObject[] IdleFollow;
     [SerializeField] Transform[] ability1Nodes;
+
+    [Header("Prefabs")]
+    [SerializeField] GameObject A1Projectile;
     float hTime;
     LayerMask LmG;
     void Start()
@@ -120,22 +124,23 @@ public class BossScript : MonoBehaviour
     private IEnumerator Ability1() //slam
     {
         Debug.Log("Ability 1: slam");
+        Vector2 startPos = transform.position;
         StartCoroutine(MoveToNode(ability1Nodes[0].position,0.2f));
         yield return new WaitUntil(() => !goingToNode);
         yield return new WaitForSeconds(0.1f);
         StartCoroutine(MoveToNode(ability1Nodes[1].position, 0.5f));
         yield return new WaitUntil(() => !goingToNode);
-        yield return new WaitForSeconds(0.2f);
-        // yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.5f);
         RaycastHit2D hit = Physics2D.Raycast(floorCheckPos.position, new Vector2(0, -20), 40, LmG);
         Debug.Log("Hit position:" + hit.point);
-        Debug.DrawLine(transform.position, hit.point, Color.azure, 2f);
+        Debug.DrawLine(transform.position, hit.point, Color.azure, 1.5f);
         float yDist = Vector2.Distance(floorCheckPos.position, hit.point);
-        StartCoroutine(MoveToNode(hit.point, yDist / 5));
+        StartCoroutine(MoveToNode(hit.point+new Vector2(0,2), yDist/5));
         yield return new WaitUntil(() => !goingToNode);
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(1.75f);
         // big hitbox area (maybe sliding floor projectiles?)
-        // return to flight path
+        StartCoroutine(MoveToNode(startPos, 0.3f));
+        yield return new WaitUntil(() => !goingToNode);
         isIdle = true;
     }
     private IEnumerator Ability2()
@@ -168,7 +173,7 @@ public class BossScript : MonoBehaviour
     {
         goingToNode = true;
         float distPos = Vector2.Distance(transform.position,endPos);
-        for (int i = 0; distPos > 1f; i++)
+        for (int i = 0; distPos > 0.5f; i++)
         {
             transform.position = Vector2.MoveTowards(transform.position, endPos, speed);
             distPos = Vector2.Distance(transform.position, endPos);
