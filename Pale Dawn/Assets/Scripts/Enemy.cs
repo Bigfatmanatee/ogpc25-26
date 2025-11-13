@@ -115,6 +115,7 @@ public class Enemy : MonoBehaviour
         {
             // Debug.Log("Layer " + getTarget() + " detected entering att hitbox");
             shouldSwing = true;
+            Debug.Log("ShouldSwing set to true: " + shouldSwing);
             target = gObject.GetComponent<HitboxPass>().passHost();
             // Debug.Log("Target saved as " + target);
         }
@@ -122,6 +123,7 @@ public class Enemy : MonoBehaviour
         {
             // Debug.Log("Layer " + getTarget() + " detected exiting att hitbox");
             shouldSwing = false;
+            Debug.Log("ShouldSwing set to false: " + shouldSwing);
             target = null;
         }
 
