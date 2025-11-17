@@ -25,6 +25,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] protected GameObject sprite;
     [SerializeField] protected Animator anim;
     [SerializeField] protected int direction = 1;
+    [SerializeField] private SpriteRenderer spriteRenderer;
     protected Rigidbody2D rb;
     protected LayerMask LmG;
     void Start()
@@ -62,7 +63,29 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    protected virtual IEnumerator swing()
+    protected IEnumerator pulse()
+    {
+        spriteRenderer.color = new Color(1, 0, 0, 1);
+
+        for (float i = 0; i <= 80; i++)
+        {
+            spriteRenderer.color = Vector4.Lerp(spriteRenderer.color, new Vector4(1, 1, 1, 1), i / 80); //smoothly changing the color back in 1 second
+            print(spriteRenderer.color.b);
+            yield return new WaitForEndOfFrame();
+        }
+
+        for (int i = 0; i < 3; i++)
+        {
+            spriteRenderer.color = new Vector4(1, 1, 1, .1f);
+            print("invis");
+            yield return new WaitForSeconds(.2f);
+            print("visible");
+            spriteRenderer.color = new Vector4(1, 1, 1, 1);
+            yield return new WaitForSeconds(.1f);
+        }
+    }
+
+    protected IEnumerator swing()
     {
         //play animation
         anim.SetBool("attacking", true);
@@ -138,6 +161,7 @@ public class Enemy : MonoBehaviour
             health -= player.GetComponent<Player>().getDamage();
             Debug.Log("After damage taken, Health:" + health);
             //play Iframe animation
+            StartCoroutine(pulse());
             InvSec = 0;
         }
         else

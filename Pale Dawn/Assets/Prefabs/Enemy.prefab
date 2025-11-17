@@ -64,6 +64,7 @@ MonoBehaviour:
   sprite: {fileID: 2761803399495359900}
   anim: {fileID: 3775560129083385759}
   direction: 1
+  spriteRenderer: {fileID: 7357717033987518986}
 --- !u!61 &6785075840298546309
 BoxCollider2D:
   m_ObjectHideFlags: 0

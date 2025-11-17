@@ -65,7 +65,8 @@ MonoBehaviour:
   sprite: {fileID: 7956434631322555456}
   anim: {fileID: 2491727253118357628}
   direction: 1
-  facing: -1
+  spriteRenderer: {fileID: 2362517763422139374}
+  facing: 1
   rotatePos: {fileID: 5131121355031962713}
 --- !u!61 &6018680328281515109
 BoxCollider2D:
