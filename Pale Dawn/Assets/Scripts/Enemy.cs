@@ -53,7 +53,7 @@ public class Enemy : MonoBehaviour
     {
         if (sinceLastAtt >= attCooldown && shouldSwing)
         {
-            // Debug.Log("Running swing function");
+            Debug.Log("Running swing function");
             StartCoroutine(swing());
             sinceLastAtt = -attTime;
         }
@@ -85,7 +85,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    protected IEnumerator swing()
+    protected virtual IEnumerator swing()
     {
         //play animation
         anim.SetBool("attacking", true);
@@ -132,13 +132,12 @@ public class Enemy : MonoBehaviour
         RaycastHit2D hit = Physics2D.Raycast(groundCheck.position, Vector2.down, 1f, LmG);
         return hit;
     }
-    public void trigger(bool enter, GameObject gObject)
+    public virtual void trigger(bool enter, GameObject gObject)
     {
         if (enter)
         {
             // Debug.Log("Layer " + getTarget() + " detected entering att hitbox");
             shouldSwing = true;
-            Debug.Log("ShouldSwing set to true: " + shouldSwing);
             target = gObject.GetComponent<HitboxPass>().passHost();
             // Debug.Log("Target saved as " + target);
         }
@@ -146,7 +145,6 @@ public class Enemy : MonoBehaviour
         {
             // Debug.Log("Layer " + getTarget() + " detected exiting att hitbox");
             shouldSwing = false;
-            Debug.Log("ShouldSwing set to false: " + shouldSwing);
             target = null;
         }
 

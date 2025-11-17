@@ -17,20 +17,23 @@ public class LRProj : Enemy
     }
     protected override IEnumerator swing()
     {
-        //play animation
-        // anim.SetBool("attacking", true);
-        yield return new WaitForSeconds(0f); //should match animation
-        if (base.shouldSwing && target.GetComponent<Player>() != null)
+        yield return new WaitForSeconds(0f);
+        if (shouldSwing && target.GetComponent<Player>() != null)
         {
-            // Debug.Log("sending damage to " + target);
             target.GetComponent<Player>().damage(this.gameObject);
             die();
         }
-        // anim.SetBool("attacking", false);
+    }
+    public override void trigger(bool enter, GameObject gObject)
+    {
+        shouldSwing = true;
+        Debug.Log("ShouldSwing set to true: " + shouldSwing);
+        target = gObject.GetComponent<HitboxPass>().passHost();
+        Debug.Log("Target saved as " + target);
     }
     protected override void FixedUpdate()
     {
-        if (!base.shouldSwing)
+        if (!shouldSwing)
         {
             rb.linearVelocity = new Vector2(speed * direction, rb.linearVelocity.y);
         }

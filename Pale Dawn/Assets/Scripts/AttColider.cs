@@ -32,6 +32,7 @@ public class AttColider : MonoBehaviour
             }
             else
             {
+                Debug.Log("Running trigger");
                 Host.GetComponent<Enemy>().trigger(true, collision.gameObject);
             }
 
