@@ -7,6 +7,7 @@ public class AttColider : MonoBehaviour
     private string layerName;
     [SerializeField] private GameObject Host;
     [SerializeField] private bool hostIsPlayer = false;
+    [SerializeField] private bool overrideTrigger = false;
     void Start()
     {
         if (!hostIsPlayer)
@@ -30,10 +31,16 @@ public class AttColider : MonoBehaviour
             {
                 Host.GetComponent<Player>().attack(collision.gameObject);
             }
-            else
+            else if (!overrideTrigger)
             {
                 Debug.Log("Running trigger");
                 Host.GetComponent<Enemy>().trigger(true, collision.gameObject);
+            } else
+            {
+                if (Host.GetComponent<LRProj>() != null)
+                {
+                    Host.GetComponent<LRProj>().trigger(true, collision.gameObject);
+                }
             }
 
         }

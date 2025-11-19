@@ -93,7 +93,7 @@ public class Enemy : MonoBehaviour
         if (shouldSwing && target.GetComponent<Player>() != null)
         {
             // Debug.Log("sending damage to " + target);
-            target.GetComponent<Player>().damage(this.gameObject);
+            target.GetComponent<Player>().damage(gameObject);
         }
         anim.SetBool("attacking", false);
     }

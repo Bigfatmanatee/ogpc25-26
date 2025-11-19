@@ -17,10 +17,10 @@ public class LRProj : Enemy
     }
     protected override IEnumerator swing()
     {
-        yield return new WaitForSeconds(0f);
+        yield return null;
         if (shouldSwing && target.GetComponent<Player>() != null)
         {
-            target.GetComponent<Player>().damage(this.gameObject);
+            target.GetComponent<Player>().damage(gameObject);
             die();
         }
     }
@@ -30,6 +30,15 @@ public class LRProj : Enemy
         Debug.Log("ShouldSwing set to true: " + shouldSwing);
         target = gObject.GetComponent<HitboxPass>().passHost();
         Debug.Log("Target saved as " + target);
+    }
+    protected override void attack()
+    {
+        if (shouldSwing)
+        {
+            Debug.Log("Running swing function");
+            StartCoroutine(swing());
+        }
+
     }
     protected override void FixedUpdate()
     {
