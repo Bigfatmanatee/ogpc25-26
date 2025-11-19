@@ -27,15 +27,15 @@ public class LRProj : Enemy
     public override void trigger(bool enter, GameObject gObject)
     {
         shouldSwing = true;
-        Debug.Log("ShouldSwing set to true: " + shouldSwing);
+        // Debug.Log("ShouldSwing set to true: " + shouldSwing);
         target = gObject.GetComponent<HitboxPass>().passHost();
-        Debug.Log("Target saved as " + target);
+        // Debug.Log("Target saved as " + target);
     }
     protected override void attack()
     {
         if (shouldSwing)
         {
-            Debug.Log("Running swing function");
+            // Debug.Log("Running swing function");
             StartCoroutine(swing());
         }
 
@@ -48,7 +48,6 @@ public class LRProj : Enemy
         }
         else
         {
-            Debug.Log("AHHHHHHHHHHHHHHHHH");
             rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
         }
 

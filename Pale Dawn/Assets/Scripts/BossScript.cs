@@ -124,21 +124,28 @@ public class BossScript : MonoBehaviour
     private IEnumerator Ability1() //slam
     {
         Debug.Log("Ability 1: slam");
-        Vector2 startPos = transform.position;
-        StartCoroutine(MoveToNode(ability1Nodes[0].position,0.2f));
+        Vector2 startPos = transform.position; //save start position for returning later
+        StartCoroutine(MoveToNode(ability1Nodes[0].position,0.2f)); //move to slam position
         yield return new WaitUntil(() => !goingToNode);
         yield return new WaitForSeconds(0.1f);
-        StartCoroutine(MoveToNode(ability1Nodes[1].position, 0.5f));
+
+        StartCoroutine(MoveToNode(ability1Nodes[1].position, 0.5f)); //move slightly up
         yield return new WaitUntil(() => !goingToNode);
-        yield return new WaitForSeconds(0.5f);
-        RaycastHit2D hit = Physics2D.Raycast(floorCheckPos.position, new Vector2(0, -20), 40, LmG);
+        yield return new WaitForSeconds(0.5f); //cooldown before slam
+
+        RaycastHit2D hit = Physics2D.Raycast(floorCheckPos.position, new Vector2(0, -20), 40, LmG); //find floor height
         Debug.Log("Hit position:" + hit.point);
         Debug.DrawLine(transform.position, hit.point, Color.azure, 1.5f);
         float yDist = Vector2.Distance(floorCheckPos.position, hit.point);
-        StartCoroutine(MoveToNode(hit.point+new Vector2(0,2), yDist/5));
+        StartCoroutine(MoveToNode(hit.point+new Vector2(0,2), yDist/5)); //move to slam
         yield return new WaitUntil(() => !goingToNode);
-        yield return new WaitForSeconds(1.75f);
+
         // big hitbox area (maybe sliding floor projectiles?)
+        Instantiate(A1Projectile, ability1Nodes[2].position, ability1Nodes[2].rotation).GetComponent<LRProj>().setDirection(-1);
+        Instantiate(A1Projectile, ability1Nodes[3].position, ability1Nodes[3].rotation).GetComponent<LRProj>().setDirection(1);
+        yield return new WaitForSeconds(1.75f);// time to dodge and attack
+
+
         StartCoroutine(MoveToNode(startPos, 0.3f));
         yield return new WaitUntil(() => !goingToNode);
         isIdle = true;

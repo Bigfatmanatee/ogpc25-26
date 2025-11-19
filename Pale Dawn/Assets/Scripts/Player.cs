@@ -265,6 +265,14 @@ public class Player : MonoBehaviour
     public int getDamage() {
         return 1;
     }
+    public int getDirection()
+    {
+        if (transform.eulerAngles.y != 0)
+        {
+            return -1;
+        }
+        return 1;
+    }
     
 }
 

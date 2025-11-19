@@ -181,7 +181,7 @@ public class Enemy : MonoBehaviour
     {
         direction *= -1;
     }
-    protected void setDirection(int a) //should be 1 or -1
+    public void setDirection(int a) //should be 1 or -1
     {
         direction = a;
     }
