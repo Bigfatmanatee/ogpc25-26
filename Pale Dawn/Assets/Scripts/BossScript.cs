@@ -52,7 +52,7 @@ public class BossScript : MonoBehaviour
         {
             transform.position = Vector2.MoveTowards(new Vector2(transform.position.x, height), new Vector2(IdleFollow[curNode].transform.position.x, height), speed * temp);
 
-            if (dist < 4f)
+            if (dist < 2f)
             {
                 curNode++;
                 if (curNode >= IdleFollow.Length)
