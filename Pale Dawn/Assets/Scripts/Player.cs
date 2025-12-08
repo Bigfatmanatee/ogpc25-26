@@ -155,11 +155,11 @@ public class Player : MonoBehaviour
 
         if (m_JumpAction.WasPressedThisFrame() && isGrounded()) //normal jumping
         {
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpPower);
+            rb.linearVelocityY = jumpPower; //was new Vector2(rb.linearVelocity.x, jumpPower);
         }
         if (m_JumpAction.WasReleasedThisFrame() && rb.linearVelocity.y > 0f) //slow down when stop holding space
         {
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, rb.linearVelocity.y * 0.25f);
+            rb.linearVelocityY = rb.linearVelocity.y * 0.25f; //was new Vector2(rb.linearVelocity.x, rb.linearVelocity.y * 0.25f);
         }
         if (!isGrounded() && !jumping) //falling without holding space
         {
@@ -181,11 +181,11 @@ public class Player : MonoBehaviour
         
         rb.linearVelocity = new Vector2(m_PlayerMovement.x * speed, rb.linearVelocity.y);
         
-        if (rb.linearVelocityX > 0) //Facing direction
+        if (m_PlayerMovement.x > 0) //Facing direction, was rb.linearVelocityX
         {
             transform.eulerAngles = new Vector3(0, 0, 0); // Normal
         }
-        else if (rb.linearVelocityX < 0)
+        else if (m_PlayerMovement.x < 0)
         {
             transform.eulerAngles = new Vector3(0, 180, 0); // Flipped
         }
