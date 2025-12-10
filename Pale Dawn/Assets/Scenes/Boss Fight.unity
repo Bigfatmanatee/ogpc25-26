@@ -5839,7 +5839,7 @@ GameObject:
   - component: {fileID: 2021666145}
   - component: {fileID: 2021666147}
   - component: {fileID: 2021666148}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: BossSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}

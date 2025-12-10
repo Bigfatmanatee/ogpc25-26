@@ -84,6 +84,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AttColider
   Host: {fileID: 5195596319383144346}
   hostIsPlayer: 1
+  overrideTrigger: 0
 --- !u!1 &2327918628683464607
 GameObject:
   m_ObjectHideFlags: 0
@@ -282,6 +283,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AttColider
   Host: {fileID: 5195596319383144346}
   hostIsPlayer: 1
+  overrideTrigger: 0
 --- !u!1 &4100146889609503726
 GameObject:
   m_ObjectHideFlags: 0
@@ -5391,8 +5393,9 @@ MonoBehaviour:
   jumpPower: 7.5
   maxHealth: 3
   health: 0
-  swingTime: 0.75
-  swingCooldown: 1
+  swingTime: 0.35
+  swingCooldown: 0.5
+  DsBoost: 9
   maxInvSec: 0
   HealthBar: []
   swingAnimator: {fileID: 7770086229232934707}
@@ -5810,3 +5813,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AttColider
   Host: {fileID: 5195596319383144346}
   hostIsPlayer: 1
+  overrideTrigger: 0
