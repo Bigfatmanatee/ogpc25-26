@@ -227,10 +227,17 @@ public class Player : MonoBehaviour
     }
     public void attack(GameObject enemy)
     {
-        //this has access to enemy hitbox gameobject, create another script to pass through damage
-        var Host = enemy.GetComponent<HitboxPass>().passHost();
-        Host.GetComponent<Enemy>().damage(gameObject);
-        StartCoroutine(onHit());
+        if (enemy.GetComponent<BossScript>() != null)
+        {
+            enemy.GetComponent<BossScript>().damage(gameObject);
+        } 
+        else
+        {
+            var Host = enemy.GetComponent<HitboxPass>().passHost();
+            Host.GetComponent<Enemy>().damage(gameObject);
+            StartCoroutine(onHit());  
+        }
+        
     }
 
     public void damage(GameObject enemy)
@@ -240,7 +247,10 @@ public class Player : MonoBehaviour
 
         if (InvSec >= maxInvSec)
         {
-            HealthBar[health - 1].GetComponent<Health>().FireOff();
+            if (health-1 >= 0)
+            {
+                HealthBar[health - 1].GetComponent<Health>().FireOff();
+            }
             health -= enemy.GetComponent<Enemy>().getDamage();
             Debug.Log("After damage taken, Health:" + health);
             InvSec = 0;

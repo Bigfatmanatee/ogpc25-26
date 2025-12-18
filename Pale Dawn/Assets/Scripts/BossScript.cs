@@ -20,6 +20,11 @@ public class BossScript : MonoBehaviour
     string[] Abilities = new string[5];
     string nextMove = null;
 
+    [Header("Other stats")]
+    [SerializeField] private int health;
+    [SerializeField] private float maxInvSec;
+    private float InvSec = 0;
+
     [Header("Time between moves")]
     [SerializeField] float moveTimeBase;
     [SerializeField] float moveTimeVarience;
@@ -33,6 +38,7 @@ public class BossScript : MonoBehaviour
     [SerializeField] GameObject A1Projectile;
     float hTime;
     LayerMask LmG;
+
     void Start()
     {
         LmG = LayerMask.GetMask("Ground");
@@ -66,6 +72,18 @@ public class BossScript : MonoBehaviour
 
     void Update()
     {
+        InvSec += Time.deltaTime;
+
+        if (health <= 0)
+        {
+            die();
+        }
+
+
+
+
+
+
         if (moveTimer <= 0)
         {
             if (nextMove != null)
@@ -187,6 +205,28 @@ public class BossScript : MonoBehaviour
             yield return new WaitForFixedUpdate();
         }
         goingToNode = false;
+    }
+
+    public void damage(GameObject player)
+    {
+        // Debug.Log("Damage recived, sent by " + player);
+        // Debug.Log("Before damage, Health:" + health);
+
+        if (InvSec >= maxInvSec)
+        {
+            health -= player.GetComponent<Player>().getDamage();
+            Debug.Log("After damage taken, Health:" + health);
+            InvSec = 0;
+        }
+        else
+        {
+            Debug.Log("didnt take damage, still invincible");
+        }
+    }
+
+    private void die()
+    {
+        gameObject.SendMessage("bossKilled");
     }
     
 }

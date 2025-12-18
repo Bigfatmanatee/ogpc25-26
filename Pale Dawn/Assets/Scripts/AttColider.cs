@@ -45,6 +45,10 @@ public class AttColider : MonoBehaviour
             }
 
         }
+        else if (hostIsPlayer && collision.gameObject.layer == LayerMask.NameToLayer("Boss"))
+        {
+            Host.GetComponent<Player>().attack(collision.gameObject);
+        }
         // else if (hostIsPlayer && collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
         // {
         //     Host.GetComponent<Player>().spark();

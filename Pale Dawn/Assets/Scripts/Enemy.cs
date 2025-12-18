@@ -53,7 +53,7 @@ public class Enemy : MonoBehaviour
     {
         if (sinceLastAtt >= attCooldown && shouldSwing)
         {
-            Debug.Log("Running swing function");
+            // Debug.Log("Running swing function");
             StartCoroutine(swing());
             sinceLastAtt = -attTime;
         }
@@ -70,16 +70,16 @@ public class Enemy : MonoBehaviour
         for (float i = 0; i <= 80; i++)
         {
             spriteRenderer.color = Vector4.Lerp(spriteRenderer.color, new Vector4(1, 1, 1, 1), i / 80); //smoothly changing the color back in 1 second
-            print(spriteRenderer.color.b);
+            // print(spriteRenderer.color.b);
             yield return new WaitForEndOfFrame();
         }
 
         for (int i = 0; i < 3; i++)
         {
             spriteRenderer.color = new Vector4(1, 1, 1, .1f);
-            print("invis");
+            // print("invis");
             yield return new WaitForSeconds(.2f);
-            print("visible");
+            // print("visible");
             spriteRenderer.color = new Vector4(1, 1, 1, 1);
             yield return new WaitForSeconds(.1f);
         }

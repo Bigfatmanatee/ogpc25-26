@@ -12,4 +12,8 @@ public class BossManager : MonoBehaviour
     {
         boss.SetActive(true);
     }
+    public void bossKilled()
+    {
+        boss.SetActive(false);
+    }
 }

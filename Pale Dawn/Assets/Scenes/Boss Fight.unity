@@ -11437,6 +11437,8 @@ MonoBehaviour:
   speed: 0.075
   ylevel: 6
   TAthreshhold: 0.1
+  health: 10
+  maxInvSec: 1
   moveTimeBase: 5
   moveTimeVarience: 0
   floorCheckPos: {fileID: 1071637294}
@@ -16251,6 +16253,14 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 875561955}
+    - target: {fileID: 2181323042885507186, guid: 152dba935a00cbe47b98ba481e1501fd, type: 3}
+      propertyPath: m_Name
+      value: BossBar
+      objectReference: {fileID: 0}
+    - target: {fileID: 2181323042885507186, guid: 152dba935a00cbe47b98ba481e1501fd, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3022732288095057393, guid: 152dba935a00cbe47b98ba481e1501fd, type: 3}
       propertyPath: m_Name
       value: Canvas 1
