@@ -23,7 +23,7 @@ public class CameraFl : MonoBehaviour
 
     void Start()
     {
-
+        transform.position = new Vector3(followPos.position.x, followPos.position.y, transform.position.z);
     }
 
     void Update()
