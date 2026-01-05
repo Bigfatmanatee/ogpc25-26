@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class TriggerManager : MonoBehaviour
 {
+    [SerializeField] BossScript boss;
     private bool activated = false;
     void OnTriggerEnter2D(Collider2D collision)
     {
@@ -9,6 +10,13 @@ public class TriggerManager : MonoBehaviour
         {
             gameObject.SendMessage("bossStart");
             activated = true;
+        }
+    }
+    void Update()
+    {
+        if (boss.dead())
+        {
+            gameObject.SendMessage("bossKilled");
         }
     }
 }

@@ -21,7 +21,8 @@ public class BossScript : MonoBehaviour
     string nextMove = null;
 
     [Header("Other stats")]
-    [SerializeField] private int health;
+    [SerializeField] private int maxHealth;
+    private int health;
     [SerializeField] private float maxInvSec;
     private float InvSec = 0;
 
@@ -48,6 +49,7 @@ public class BossScript : MonoBehaviour
         Abilities[3] = "Ability4";
         Abilities[4] = "Ability5";
         isIdle = true;
+        health = maxHealth;
     }
     void FixedUpdate()
     {
@@ -73,15 +75,6 @@ public class BossScript : MonoBehaviour
     void Update()
     {
         InvSec += Time.deltaTime;
-
-        if (health <= 0)
-        {
-            die();
-        }
-
-
-
-
 
 
         if (moveTimer <= 0)
@@ -158,7 +151,7 @@ public class BossScript : MonoBehaviour
         StartCoroutine(MoveToNode(hit.point+new Vector2(0,2), yDist/5)); //move to slam
         yield return new WaitUntil(() => !goingToNode);
 
-        // big hitbox area (maybe sliding floor projectiles?)
+        //sliding floor projectiles
         Instantiate(A1Projectile, ability1Nodes[2].position, ability1Nodes[2].rotation).GetComponent<LRProj>().setDirection(-1);
         Instantiate(A1Projectile, ability1Nodes[3].position, ability1Nodes[3].rotation).GetComponent<LRProj>().setDirection(1);
         yield return new WaitForSeconds(1.75f);// time to dodge and attack
@@ -224,9 +217,24 @@ public class BossScript : MonoBehaviour
         }
     }
 
-    private void die()
+    public bool dead()
     {
-        gameObject.SendMessage("bossKilled");
+        if (health <= 0)
+        {
+            return true;
+        } 
+        else
+        {
+            return false; 
+        }
     }
     
+    public int getHealth()
+    {
+        return health;
+    }
+    public float getHealthPercent()
+    {
+        return (float) health/maxHealth;
+    }
 }

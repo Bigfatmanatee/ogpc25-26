@@ -182,6 +182,7 @@ GameObject:
   - component: {fileID: 113230237}
   - component: {fileID: 113230241}
   - component: {fileID: 113230240}
+  - component: {fileID: 113230243}
   m_Layer: 0
   m_Name: BossTrigger
   m_TagString: Untagged
@@ -304,6 +305,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b0a19de61f380f40954d9f1896141ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  boss: {fileID: 2021666147}
+--- !u!114 &113230243
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 113230236}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ba3ba70b3eead64aa4613b6c287c92e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  slider: {fileID: 1669433441}
+  fill: {fileID: 2058891145}
+  border: {fileID: 640262294}
+  text: {fileID: 909550439}
+  boss: {fileID: 2021666147}
 --- !u!1 &173851909
 GameObject:
   m_ObjectHideFlags: 0
@@ -5966,6 +5985,17 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!114 &640262294 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1202723299413732174, guid: 152dba935a00cbe47b98ba481e1501fd, type: 3}
+  m_PrefabInstance: {fileID: 2093800491}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
 --- !u!1 &645367275
 GameObject:
   m_ObjectHideFlags: 0
@@ -9987,6 +10017,11 @@ MonoBehaviour:
   yOffset: 2
   xOffWithCam: 1
   speed: 0.075
+--- !u!1 &909550439 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3880424483296636651, guid: 152dba935a00cbe47b98ba481e1501fd, type: 3}
+  m_PrefabInstance: {fileID: 2093800491}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1015393175
 GameObject:
   m_ObjectHideFlags: 0
@@ -11094,6 +11129,39 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1720983745}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1669433436 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2181323042885507186, guid: 152dba935a00cbe47b98ba481e1501fd, type: 3}
+  m_PrefabInstance: {fileID: 2093800491}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1669433440
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1669433436}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ba3ba70b3eead64aa4613b6c287c92e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  slider: {fileID: 1669433441}
+  fill: {fileID: 2058891145}
+  border: {fileID: 640262294}
+  text: {fileID: 909550439}
+  boss: {fileID: 2021666147}
+--- !u!114 &1669433441 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1344740517203882797, guid: 152dba935a00cbe47b98ba481e1501fd, type: 3}
+  m_PrefabInstance: {fileID: 2093800491}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1669433436}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Slider
 --- !u!1 &1720983744
 GameObject:
   m_ObjectHideFlags: 0
@@ -11437,7 +11505,7 @@ MonoBehaviour:
   speed: 0.075
   ylevel: 6
   TAthreshhold: 0.1
-  health: 10
+  maxHealth: 8
   maxInvSec: 1
   moveTimeBase: 5
   moveTimeVarience: 0
@@ -11572,6 +11640,17 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   - {x: 0.5, y: 0.5, z: 0}
   - {x: -0.5, y: 0.5, z: 0}
+--- !u!114 &2058891145 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8608081009503174477, guid: 152dba935a00cbe47b98ba481e1501fd, type: 3}
+  m_PrefabInstance: {fileID: 2093800491}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
 --- !u!1 &2086877939
 GameObject:
   m_ObjectHideFlags: 0
@@ -16253,22 +16332,74 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 875561955}
+    - target: {fileID: 1001220749844432374, guid: 152dba935a00cbe47b98ba481e1501fd, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1001220749844432374, guid: 152dba935a00cbe47b98ba481e1501fd, type: 3}
+      propertyPath: m_Transition
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1001220749844432374, guid: 152dba935a00cbe47b98ba481e1501fd, type: 3}
+      propertyPath: m_Interactable
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1001220749844432374, guid: 152dba935a00cbe47b98ba481e1501fd, type: 3}
+      propertyPath: m_Navigation.m_Mode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1344740517203882797, guid: 152dba935a00cbe47b98ba481e1501fd, type: 3}
+      propertyPath: m_Value
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2181323042885507186, guid: 152dba935a00cbe47b98ba481e1501fd, type: 3}
       propertyPath: m_Name
       value: BossBar
       objectReference: {fileID: 0}
     - target: {fileID: 2181323042885507186, guid: 152dba935a00cbe47b98ba481e1501fd, type: 3}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2912558906011742834, guid: 152dba935a00cbe47b98ba481e1501fd, type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3022732288095057393, guid: 152dba935a00cbe47b98ba481e1501fd, type: 3}
       propertyPath: m_Name
       value: Canvas 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 5737203023269617325, guid: 152dba935a00cbe47b98ba481e1501fd, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5737203023269617325, guid: 152dba935a00cbe47b98ba481e1501fd, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7975563955751570637, guid: 152dba935a00cbe47b98ba481e1501fd, type: 3}
+      propertyPath: m_text
+      value: Boss Name
+      objectReference: {fileID: 0}
+    - target: {fileID: 7975563955751570637, guid: 152dba935a00cbe47b98ba481e1501fd, type: 3}
+      propertyPath: m_fontSize
+      value: 36
+      objectReference: {fileID: 0}
+    - target: {fileID: 7975563955751570637, guid: 152dba935a00cbe47b98ba481e1501fd, type: 3}
+      propertyPath: m_isRightToLeft
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7975563955751570637, guid: 152dba935a00cbe47b98ba481e1501fd, type: 3}
+      propertyPath: m_enableAutoSizing
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 1001220749844432374, guid: 152dba935a00cbe47b98ba481e1501fd, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2181323042885507186, guid: 152dba935a00cbe47b98ba481e1501fd, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1669433440}
   m_SourcePrefab: {fileID: 100100000, guid: 152dba935a00cbe47b98ba481e1501fd, type: 3}
 --- !u!1 &2093800492 stripped
 GameObject:
