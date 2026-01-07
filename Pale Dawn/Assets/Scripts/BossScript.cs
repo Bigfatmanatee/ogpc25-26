@@ -34,9 +34,13 @@ public class BossScript : MonoBehaviour
     [SerializeField] Transform floorCheckPos;
     [SerializeField] GameObject[] IdleFollow;
     [SerializeField] Transform[] ability1Nodes;
+    [SerializeField] Transform ability2Node;
 
     [Header("Prefabs")]
     [SerializeField] GameObject A1Projectile;
+    [SerializeField] GameObject A2Projectile;
+    [Header("Player Info")]
+    [SerializeField] Transform playerPos;
     float hTime;
     LayerMask LmG;
 
@@ -86,7 +90,8 @@ public class BossScript : MonoBehaviour
             }
             moveTimer = moveTimeBase + UnityEngine.Random.Range(-moveTimeVarience, moveTimeVarience);
             // nextMove = Abilities[UnityEngine.Random.Range(0, Abilities.Count())];
-            nextMove = "Ability1"; //test specific move
+            // nextMove = Abilities[UnityEngine.Random.Range(0, 2)];
+            nextMove = "Ability2"; //test specific move
             Debug.Log("Timer: " + moveTimer + ", next move: " + nextMove);
         }
         else
@@ -161,9 +166,10 @@ public class BossScript : MonoBehaviour
         yield return new WaitUntil(() => !goingToNode);
         isIdle = true;
     }
-    private IEnumerator Ability2()
+    private IEnumerator Ability2() //shoot projectiles
     {
-        Debug.Log("Ability 2");
+        Vector2 pos = new Vector2(playerPos.position.x,playerPos.position.y);
+        Instantiate(A2Projectile, ability2Node.position, ability2Node.rotation).GetComponent<FlyingProj>().updateAim(pos);
         yield return new WaitForSeconds(1f);
         isIdle = true;
     }
