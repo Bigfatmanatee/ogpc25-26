@@ -7,11 +7,12 @@ public class FlyingProj : Enemy
 {
     protected Transform startPos;
     protected Vector2 aim;
+    protected double startTime;
     protected override void move()
     {
         if (checkForWall() || checkForFloor())
         {
-            die();
+            // die();
         }
         else
         {
@@ -40,23 +41,26 @@ public class FlyingProj : Enemy
         {
             // Debug.Log("Running swing function");
             StartCoroutine(swing());
-            die();
         }
 
     }
     protected override void ExtraStart()
     {
         rb.gravityScale = 0;
+        startTime = Time.time;
     }
     protected override void FixedUpdate()
     {
-        rb.position = Vector2.MoveTowards(rb.position,aim,speed);
-        rb.linearVelocity = Vector2.zero;
+        transform.position = Vector2.MoveTowards(transform.position,aim,speed);
+        if (Vector2.Distance(transform.position,aim) <= 0.2f)
+        {
+            die();
+        }
     }
 
     public void updateAim(Vector2 a)
     {
         aim = a;
-        Debug.Log("new position: "+aim.x+" "+aim.y);
+        // Debug.Log("new position: "+aim.x+" "+aim.y);
     }
 }

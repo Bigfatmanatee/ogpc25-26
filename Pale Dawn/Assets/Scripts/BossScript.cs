@@ -168,8 +168,11 @@ public class BossScript : MonoBehaviour
     }
     private IEnumerator Ability2() //shoot projectiles
     {
-        Vector2 pos = new Vector2(playerPos.position.x,playerPos.position.y);
-        Instantiate(A2Projectile, ability2Node.position, ability2Node.rotation).GetComponent<FlyingProj>().updateAim(pos);
+        float posX = playerPos.position.x;
+        float posY = playerPos.position.y;
+        Instantiate(A2Projectile, ability2Node.position, ability2Node.rotation).GetComponent<FlyingProj>().updateAim(new Vector2(posX,posY));
+        Instantiate(A2Projectile, ability2Node.position, ability2Node.rotation).GetComponent<FlyingProj>().updateAim(new Vector2(posX-3,posY));
+        Instantiate(A2Projectile, ability2Node.position, ability2Node.rotation).GetComponent<FlyingProj>().updateAim(new Vector2(posX+3,posY));
         yield return new WaitForSeconds(1f);
         isIdle = true;
     }

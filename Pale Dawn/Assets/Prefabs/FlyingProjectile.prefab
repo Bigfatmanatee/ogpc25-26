@@ -251,7 +251,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1592913105963078000}
-  - component: {fileID: 2464493238934839565}
   - component: {fileID: 6130660619657794905}
   - component: {fileID: 2755360800766842767}
   m_Layer: 9
@@ -276,52 +275,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 8717140498707569015}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &2464493238934839565
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1256983752156210637}
-  m_Enabled: 0
-  serializedVersion: 3
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
-  m_Offset: {x: 0.13359833, y: -0.02220565}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Size: {x: 0.95033264, y: 0.8438914}
-  m_EdgeRadius: 0
 --- !u!114 &6130660619657794905
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -367,12 +320,12 @@ CircleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Radius: 0.15
+  m_Radius: 0.2
 --- !u!1 &4176387417986852988
 GameObject:
   m_ObjectHideFlags: 0
@@ -383,7 +336,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8717140498707569015}
   - component: {fileID: 4022676863005110853}
-  - component: {fileID: 999672839760155787}
   - component: {fileID: 1524250510679816504}
   - component: {fileID: 864758317338842844}
   m_Layer: 0
@@ -403,7 +355,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -7.99, y: -0.48, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.75, y: 1.75, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4927492943920757727}
@@ -426,66 +378,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2616d0c36cf1f734fb0f0061eb9d6e8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlyingProj
-  speed: 0.005
+  speed: 0.4
   maxHealth: 5
   health: 5
   damageNum: 1
   attTime: 0
   attCooldown: 0
   maxInvSec: 0
-  attHitBox: {fileID: 2464493238934839565}
+  attHitBox: {fileID: 2755360800766842767}
   wallCheck: {fileID: 1403683210595328580}
   groundCheck: {fileID: 8256784895546281455}
   sprite: {fileID: 994743628469697655}
   anim: {fileID: 0}
   direction: 1
   spriteRenderer: {fileID: 5062046903110810413}
---- !u!61 &999672839760155787
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4176387417986852988}
-  m_Enabled: 0
-  serializedVersion: 3
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
 --- !u!50 &1524250510679816504
 Rigidbody2D:
   serializedVersion: 5
@@ -548,7 +454,7 @@ CircleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Radius: 0.2
+  m_Radius: 0.02
 --- !u!1 &5118939043425589426
 GameObject:
   m_ObjectHideFlags: 0

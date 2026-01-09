@@ -24,6 +24,7 @@ public class AttColider : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision) //needs to get assigned host to send back info
     {
+        // Debug.Log("Entered collision of layer "+collision.gameObject.layer);
         if (collision.gameObject.layer == LayerMask.NameToLayer(layerName))
         {
 
@@ -38,9 +39,15 @@ public class AttColider : MonoBehaviour
             } 
             else
             {
+                // Debug.Log("override trigger");
                 if (Host.GetComponent<LRProj>() != null)
                 {
                     Host.GetComponent<LRProj>().trigger(true, collision.gameObject);
+                }
+                if (Host.GetComponent<FlyingProj>() != null)
+                {
+                    // Debug.Log("Flying Projectile trigger");
+                    Host.GetComponent<FlyingProj>().trigger(true, collision.gameObject);
                 }
             }
 

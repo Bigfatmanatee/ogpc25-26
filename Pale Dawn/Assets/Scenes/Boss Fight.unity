@@ -11374,6 +11374,10 @@ PrefabInstance:
       value: Player (1)
       objectReference: {fileID: 0}
     - target: {fileID: 5401654345463992669, guid: 75993c777a2b02d42afbddfd7a2b62f7, type: 3}
+      propertyPath: maxInvSec
+      value: 1.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 5401654345463992669, guid: 75993c777a2b02d42afbddfd7a2b62f7, type: 3}
       propertyPath: HealthBar.Array.size
       value: 3
       objectReference: {fileID: 0}
