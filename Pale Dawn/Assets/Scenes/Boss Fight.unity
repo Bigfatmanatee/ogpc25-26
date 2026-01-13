@@ -16417,11 +16417,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7975563955751570637, guid: 152dba935a00cbe47b98ba481e1501fd, type: 3}
       propertyPath: m_text
-      value: Boss Name
+      value: The last Ashkeeper
       objectReference: {fileID: 0}
     - target: {fileID: 7975563955751570637, guid: 152dba935a00cbe47b98ba481e1501fd, type: 3}
       propertyPath: m_fontSize
-      value: 36
+      value: 44.75
       objectReference: {fileID: 0}
     - target: {fileID: 7975563955751570637, guid: 152dba935a00cbe47b98ba481e1501fd, type: 3}
       propertyPath: m_isRightToLeft
