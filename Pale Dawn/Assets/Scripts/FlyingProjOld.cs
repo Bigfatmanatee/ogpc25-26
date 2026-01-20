@@ -3,11 +3,12 @@ using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class FlyingProj : Enemy
+public class FlyingProjOld : Enemy
 {
     protected Transform startPos;
     protected Vector2 aim;
     protected double startTime;
+    protected GameObject ReflTarget;
     protected override void move()
     {
         if (checkForWall() || checkForFloor())
@@ -48,6 +49,7 @@ public class FlyingProj : Enemy
     {
         rb.gravityScale = 0;
         startTime = Time.time;
+        InvSec = maxInvSec;
     }
     protected override void FixedUpdate()
     {
@@ -62,5 +64,20 @@ public class FlyingProj : Enemy
     {
         aim = a;
         // Debug.Log("new position: "+aim.x+" "+aim.y);
+    }
+    public void updateAim(Vector2 a, GameObject boss)
+    {
+        aim = a;
+        ReflTarget = boss;
+    }
+
+    public override void damage(GameObject player)
+    {
+        //reflect code
+        if (InvSec >= maxInvSec)
+        {
+            updateAim(ReflTarget.transform.position);
+        }
+        
     }
 }

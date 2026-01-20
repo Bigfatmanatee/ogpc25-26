@@ -40,7 +40,7 @@ public class BossScript : MonoBehaviour
     [SerializeField] GameObject A1Projectile;
     [SerializeField] GameObject A2Projectile;
     [Header("Player Info")]
-    [SerializeField] Transform playerPos;
+    [SerializeField] GameObject player;
     float hTime;
     LayerMask LmG;
 
@@ -168,12 +168,8 @@ public class BossScript : MonoBehaviour
     }
     private IEnumerator Ability2() //shoot projectiles
     {
-        float posX = playerPos.position.x;
-        float posY = playerPos.position.y;
-        Instantiate(A2Projectile, ability2Node.position, ability2Node.rotation).GetComponent<FlyingProj>().updateAim(new Vector2(posX,posY));
-        Instantiate(A2Projectile, ability2Node.position, ability2Node.rotation).GetComponent<FlyingProj>().updateAim(new Vector2(posX-3,posY));
-        Instantiate(A2Projectile, ability2Node.position, ability2Node.rotation).GetComponent<FlyingProj>().updateAim(new Vector2(posX+3,posY));
-        yield return new WaitForSeconds(1f);
+        Instantiate(A2Projectile, ability2Node.position, ability2Node.rotation).GetComponent<Projectile>().setTarget(player, gameObject);
+        yield return new WaitForSeconds(2f);//stall for long enough to have reflect hit
         isIdle = true;
     }
     private IEnumerator Ability3()

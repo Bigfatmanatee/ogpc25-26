@@ -44,10 +44,9 @@ public class AttColider : MonoBehaviour
                 {
                     Host.GetComponent<LRProj>().trigger(true, collision.gameObject);
                 }
-                if (Host.GetComponent<FlyingProj>() != null)
+                if (Host.GetComponent<Projectile>() != null)
                 {
-                    // Debug.Log("Flying Projectile trigger");
-                    Host.GetComponent<FlyingProj>().trigger(true, collision.gameObject);
+                    Host.GetComponent<Projectile>().trigger(true, collision.gameObject);
                 }
             }
 

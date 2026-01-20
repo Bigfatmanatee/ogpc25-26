@@ -231,6 +231,10 @@ public class Player : MonoBehaviour
         {
             enemy.GetComponent<BossScript>().damage(gameObject);
         } 
+        else if (enemy.GetComponent<Projectile>() != null)
+        {
+            enemy.GetComponent<Projectile>().damage(gameObject);
+        }
         else
         {
             var Host = enemy.GetComponent<HitboxPass>().passHost();

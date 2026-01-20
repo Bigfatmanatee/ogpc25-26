@@ -149,7 +149,7 @@ public class Enemy : MonoBehaviour
         }
 
     }
-    public void damage(GameObject player)
+    public virtual void damage(GameObject player)
     {
         // Debug.Log("Damage recived, sent by " + player);
         // Debug.Log("Before damage, Health:" + health);
