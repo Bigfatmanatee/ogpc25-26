@@ -238,7 +238,15 @@ public class Player : MonoBehaviour
         else
         {
             var Host = enemy.GetComponent<HitboxPass>().passHost();
-            Host.GetComponent<Enemy>().damage(gameObject);
+            if (Host.GetComponent<Enemy>() != null)
+            {
+                Host.GetComponent<Enemy>().damage(gameObject);
+            } 
+            else if (Host.GetComponent<Projectile>() != null)
+            {
+                Host.GetComponent<Projectile>().damage(gameObject);
+            }
+            
             StartCoroutine(onHit());  
         }
         
@@ -255,7 +263,15 @@ public class Player : MonoBehaviour
             {
                 HealthBar[health - 1].GetComponent<Health>().FireOff();
             }
-            health -= enemy.GetComponent<Enemy>().getDamage();
+            if (enemy.GetComponent<Enemy>() != null)
+            {
+                health -= enemy.GetComponent<Enemy>().getDamage();
+            } 
+            else
+            {
+                health -= 1;
+            }
+            
             Debug.Log("After damage taken, Health:" + health);
             InvSec = 0;
         }

@@ -1,9 +1,8 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class AttColider : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    // Split into enemy and projectile files?
     private string layerName;
     [SerializeField] private GameObject Host;
     [SerializeField] private bool hostIsPlayer = false;
@@ -12,14 +11,19 @@ public class AttColider : MonoBehaviour
     {
         if (!hostIsPlayer)
         {
-            layerName = Host.GetComponent<Enemy>().getTarget();
+            if (Host.GetComponent<Enemy>() != null)
+            {
+                layerName = Host.GetComponent<Enemy>().getTarget();
+            } 
+            else if (Host.GetComponent<Projectile>() != null)
+            {
+                layerName = Host.GetComponent<Projectile>().getTarget();
+            } 
+            else
+            {
+                layerName = "Player";
+            }
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 
     void OnTriggerEnter2D(Collider2D collision) //needs to get assigned host to send back info
@@ -39,14 +43,9 @@ public class AttColider : MonoBehaviour
             } 
             else
             {
-                // Debug.Log("override trigger");
-                if (Host.GetComponent<LRProj>() != null)
-                {
-                    Host.GetComponent<LRProj>().trigger(true, collision.gameObject);
-                }
                 if (Host.GetComponent<Projectile>() != null)
                 {
-                    Host.GetComponent<Projectile>().trigger(true, collision.gameObject);
+                    Host.GetComponent<Projectile>().trigger(collision.gameObject);
                 }
             }
 
@@ -64,7 +63,7 @@ public class AttColider : MonoBehaviour
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer(layerName))
         {
-            if (!hostIsPlayer)
+            if (!hostIsPlayer && Host.GetComponent<Enemy>() != null)
             {
                 Host.GetComponent<Enemy>().trigger(false, collision.gameObject);
             }

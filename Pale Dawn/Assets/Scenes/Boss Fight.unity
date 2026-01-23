@@ -11446,8 +11446,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2021666146}
-  - component: {fileID: 2021666145}
   - component: {fileID: 2021666147}
+  - component: {fileID: 2021666145}
   - component: {fileID: 2021666148}
   m_Layer: 11
   m_Name: Boss
@@ -11565,7 +11565,7 @@ MonoBehaviour:
   ability2Node: {fileID: 479961943}
   A1Projectile: {fileID: 6780347428669985516, guid: 6da3ce3d06392384d98c58a5432f16b0, type: 3}
   A2Projectile: {fileID: 4176387417986852988, guid: 5caba28e166d67948aa0983e4fbf6291, type: 3}
-  playerPos: {fileID: 192792306}
+  player: {fileID: 1563933595}
 --- !u!70 &2021666148
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -16623,10 +16623,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1524250510679816504, guid: 5caba28e166d67948aa0983e4fbf6291, type: 3}
-      propertyPath: m_GravityScale
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4022676863005110853, guid: 5caba28e166d67948aa0983e4fbf6291, type: 3}
       propertyPath: speed
       value: 15
@@ -16679,7 +16675,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4022676863005110853, guid: 5caba28e166d67948aa0983e4fbf6291, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

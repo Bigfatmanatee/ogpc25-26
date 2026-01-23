@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Projectile : MonoBehaviour
@@ -52,23 +53,25 @@ public class Projectile : MonoBehaviour
 
     protected virtual void FixedUpdate()
     {
-        rb.linearVelocity = ((Vector2) transform.position - pos); //normalize vector and add speed into equation
+        rb.linearVelocity = (pos - (Vector2) transform.position).normalized * speed;
         if (Vector2.Distance(transform.position, pos) <= 0.1f)
         {
             die();
         }
     }
 
-    protected bool checkForWall()
+    protected bool collisionCheck()
     {
         return Physics2D.OverlapCircle(colCheck.position, 0.2f, LmG);
     }
 
-    public virtual void trigger(bool enter, GameObject gObject) //re-write
+    public virtual void trigger(GameObject gObject)
     {
-        if (enter)
+        target = gObject.GetComponent<HitboxPass>().passHost();
+        if (target.GetComponent<Player>() != null) 
         {
-            target = gObject.GetComponent<HitboxPass>().passHost();
+            target.GetComponent<Player>().damage(gameObject);
+            die();
         }
     }
     public virtual void damage(GameObject player)
@@ -88,7 +91,10 @@ public class Projectile : MonoBehaviour
 
 
 
-
+    public void setDirection(int a)
+    {
+        direction = a;
+    } 
 
     public float getSpeed()
     {

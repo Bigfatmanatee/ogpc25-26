@@ -370,7 +370,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4768696752564186878}
-  - component: {fileID: 5852020383467010480}
   - component: {fileID: 2479062969172000334}
   - component: {fileID: 2372818254723818741}
   - component: {fileID: 2065763053103594840}
@@ -402,32 +401,6 @@ Transform:
   - {fileID: 620992846828207715}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5852020383467010480
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6780347428669985516}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 438a065cb54094c4e949869ba28d6e02, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::LREnemy
-  speed: 3
-  maxHealth: 5
-  health: 5
-  damageNum: 1
-  attTime: 0.5
-  attCooldown: 1
-  maxInvSec: 1
-  attHitBox: {fileID: 505914169006078162}
-  wallCheck: {fileID: 6206550780130242419}
-  groundCheck: {fileID: 7113747436510080230}
-  sprite: {fileID: 392425919856371356}
-  anim: {fileID: 7497677455397235536}
-  direction: 1
-  spriteRenderer: {fileID: 0}
 --- !u!114 &2479062969172000334
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -441,17 +414,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LRProj
   speed: 10
-  maxHealth: 5
-  health: 5
   damageNum: 1
-  attTime: 0
-  attCooldown: 0
-  maxInvSec: 0
   attHitBox: {fileID: 505914169006078162}
-  wallCheck: {fileID: 6206550780130242419}
-  groundCheck: {fileID: 7113747436510080230}
-  sprite: {fileID: 0}
-  anim: {fileID: 0}
+  colCheck: {fileID: 6206550780130242419}
+  sprite: {fileID: 392425919856371356}
+  anim: {fileID: 7497677455397235536}
   direction: -1
   spriteRenderer: {fileID: 0}
 --- !u!61 &2372818254723818741

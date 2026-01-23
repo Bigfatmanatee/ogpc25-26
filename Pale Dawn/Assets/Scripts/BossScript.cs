@@ -90,8 +90,8 @@ public class BossScript : MonoBehaviour
             }
             moveTimer = moveTimeBase + UnityEngine.Random.Range(-moveTimeVarience, moveTimeVarience);
             // nextMove = Abilities[UnityEngine.Random.Range(0, Abilities.Count())];
-            // nextMove = Abilities[UnityEngine.Random.Range(0, 2)];
-            nextMove = "Ability2"; //test specific move
+            nextMove = Abilities[UnityEngine.Random.Range(0, 2)];
+            // nextMove = "Ability2"; //test specific move
             Debug.Log("Timer: " + moveTimer + ", next move: " + nextMove);
         }
         else
@@ -141,7 +141,8 @@ public class BossScript : MonoBehaviour
     {
         Debug.Log("Ability 1: slam");
         Vector2 startPos = transform.position; //save start position for returning later
-        StartCoroutine(MoveToNode(ability1Nodes[0].position,0.2f)); //move to slam position
+
+        StartCoroutine(MoveToNode(ability1Nodes[0].position,0.2f)); //move to slam position (change from nodes to dynamic)
         yield return new WaitUntil(() => !goingToNode);
         yield return new WaitForSeconds(0.1f);
 
@@ -157,8 +158,8 @@ public class BossScript : MonoBehaviour
         yield return new WaitUntil(() => !goingToNode);
 
         //sliding floor projectiles
-        Instantiate(A1Projectile, ability1Nodes[2].position, ability1Nodes[2].rotation).GetComponent<LRProj>().setDirection(-1);
-        Instantiate(A1Projectile, ability1Nodes[3].position, ability1Nodes[3].rotation).GetComponent<LRProj>().setDirection(1);
+        Instantiate(A1Projectile, ability1Nodes[2].position, ability1Nodes[2].rotation).GetComponent<Projectile>().setDirection(-1);
+        Instantiate(A1Projectile, ability1Nodes[3].position, ability1Nodes[3].rotation).GetComponent<Projectile>().setDirection(1);
         yield return new WaitForSeconds(1.75f);// time to dodge and attack
 
 
