@@ -71,16 +71,16 @@ public class Enemy : MonoBehaviour
         for (float i = 0; i <= 80; i++)
         {
             spriteRenderer.color = Vector4.Lerp(spriteRenderer.color, new Vector4(1, 1, 1, 1), i / 80); //smoothly changing the color back in 1 second
-            print(spriteRenderer.color.b);
+            // print(spriteRenderer.color.b);
             yield return new WaitForEndOfFrame();
         }
 
         for (int i = 0; i < 3; i++)
         {
             spriteRenderer.color = new Vector4(1, 1, 1, .1f);
-            print("invis");
+            // print("invis");
             yield return new WaitForSeconds(.2f);
-            print("visible");
+            // print("visible");
             spriteRenderer.color = new Vector4(1, 1, 1, 1);
             yield return new WaitForSeconds(.1f);
         }
@@ -96,7 +96,7 @@ public class Enemy : MonoBehaviour
         if (shouldSwing && target.GetComponent<Player>() != null)
         {
             // Debug.Log("sending damage to " + target);
-            target.GetComponent<Player>().damage(this.gameObject);
+            target.GetComponent<Player>().damage(gameObject);
         }
         anim.SetBool("attacking", false);
     }
@@ -137,13 +137,12 @@ public class Enemy : MonoBehaviour
         RaycastHit2D hit = Physics2D.Raycast(groundCheck.position, Vector2.down, 1f, LmG);
         return hit;
     }
-    public void trigger(bool enter, GameObject gObject)
+    public virtual void trigger(bool enter, GameObject gObject)
     {
         if (enter)
         {
             // Debug.Log("Layer " + getTarget() + " detected entering att hitbox");
             shouldSwing = true;
-            Debug.Log("ShouldSwing set to true: " + shouldSwing);
             target = gObject.GetComponent<HitboxPass>().passHost();
             // Debug.Log("Target saved as " + target);
         }
@@ -151,7 +150,6 @@ public class Enemy : MonoBehaviour
         {
             // Debug.Log("Layer " + getTarget() + " detected exiting att hitbox");
             shouldSwing = false;
-            Debug.Log("ShouldSwing set to false: " + shouldSwing);
             target = null;
         }
 
@@ -188,7 +186,7 @@ public class Enemy : MonoBehaviour
     {
         direction *= -1;
     }
-    protected void setDirection(int a) //should be 1 or -1
+    public void setDirection(int a) //should be 1 or -1
     {
         direction = a;
     }

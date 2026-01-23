@@ -15504,8 +15504,9 @@ MonoBehaviour:
   jumpPower: 7.5
   maxHealth: 3
   health: 0
-  swingTime: 0.75
-  swingCooldown: 1
+  swingTime: 0.35
+  swingCooldown: 0.5
+  DsBoost: 9
   maxInvSec: 0
   HealthBar:
   - {fileID: 0}
@@ -15926,3 +15927,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AttColider
   Host: {fileID: 5195596319383144346}
   hostIsPlayer: 1
+  overrideTrigger: 0

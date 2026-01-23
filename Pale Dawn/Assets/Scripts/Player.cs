@@ -17,6 +17,7 @@ public class Player : MonoBehaviour
     private LayerMask LmG; //Ground layer mask
     private LayerMask LmE; //Enemy layer mask
     private LayerMask LmA; //Attack layer mask
+    [Header("Hitboxes")]
 
     [SerializeField] private Collider2D hitBox;
     [SerializeField] private Collider2D attHitBox;
@@ -29,12 +30,14 @@ public class Player : MonoBehaviour
     [SerializeField] private StopTime timeManager;
 
 
+    [Header("Player Stats")]
     [SerializeField] private float speed;
     [SerializeField] private float jumpPower;
     [SerializeField] private int maxHealth;
     [SerializeField] private int health;
     [SerializeField] private float swingTime;
     [SerializeField] private float swingCooldown;
+    [SerializeField] private float DsBoost;
     [SerializeField] private float maxInvSec;
     private float InvSec = 0;
     private bool isSwinging = false;
@@ -178,7 +181,7 @@ public class Player : MonoBehaviour
         }
         if (m_JumpAction.WasReleasedThisFrame() && rb.linearVelocity.y > 0f) //slow down when stop holding space
         {
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, rb.linearVelocity.y * 0.25f);
+            rb.linearVelocityY = rb.linearVelocity.y * 0.25f; //was new Vector2(rb.linearVelocity.x, rb.linearVelocity.y * 0.25f);
         }
         if (!isGrounded() && !jumping) //falling without holding space
         {
@@ -200,11 +203,11 @@ public class Player : MonoBehaviour
         
         rb.linearVelocity = new Vector2(Mathf.Lerp(rb.linearVelocityX, m_PlayerMovement.x * speed, 8 * Time.deltaTime), rb.linearVelocity.y);
         
-        if (rb.linearVelocityX > 0) //Facing direction
+        if (m_PlayerMovement.x > 0) //Facing direction, was rb.linearVelocityX
         {
             transform.eulerAngles = new Vector3(0, 0, 0); // Normal
         }
-        else if (rb.linearVelocityX < 0)
+        else if (m_PlayerMovement.x < 0)
         {
             transform.eulerAngles = new Vector3(0, 180, 0); // Flipped
         }
@@ -225,7 +228,7 @@ public class Player : MonoBehaviour
             attHitBoxU.enabled = true;
             // Debug.DrawLine(transform.position, transform.position + new Vector3(0, 1, 0), Color.aliceBlue, swingTime);
         }
-        else if (m_PlayerMovement.y < -deadzone) //deadzone not fully working, is it based off velocity?
+        else if (m_PlayerMovement.y < -deadzone)
         {
             attHitBoxD.enabled = true;
             // Debug.DrawLine(transform.position, transform.position + new Vector3(0, -1, 0), Color.aliceBlue, swingTime);
@@ -233,14 +236,6 @@ public class Player : MonoBehaviour
         else
         {
             attHitBox.enabled = true;
-            // if (transform.eulerAngles.y == 0)
-            // {
-            //     Debug.DrawLine(transform.position, transform.position + new Vector3(1, 0, 0), Color.aliceBlue, swingTime);
-            // }
-            // else
-            // {
-            //     Debug.DrawLine(transform.position, transform.position + new Vector3(-1, 0, 0), Color.aliceBlue, swingTime);
-            // }
             
         }
         yield return new WaitForSeconds(swingTime);
@@ -251,17 +246,29 @@ public class Player : MonoBehaviour
     }
     public void attack(GameObject enemy)
     {
-        //this has access to enemy hitbox gameobject, create another script to pass through damage
-        var Host = enemy.GetComponent<HitboxPass>().passHost();
-        Host.GetComponent<Enemy>().damage(gameObject);
-        timeManager.Pause(.1f);
-    }
-    public void spark()
-    {
-        // if (m_PlayerMovement.y > deadzone)
-
-
-        //raycast in directing of swing, if it hits a wall then spawn sparks at collision point
+        if (enemy.GetComponent<BossScript>() != null)
+        {
+            enemy.GetComponent<BossScript>().damage(gameObject);
+        } 
+        else if (enemy.GetComponent<Projectile>() != null)
+        {
+            enemy.GetComponent<Projectile>().damage(gameObject);
+        }
+        else
+        {
+            var Host = enemy.GetComponent<HitboxPass>().passHost();
+            if (Host.GetComponent<Enemy>() != null)
+            {
+                Host.GetComponent<Enemy>().damage(gameObject);
+            } 
+            else if (Host.GetComponent<Projectile>() != null)
+            {
+                Host.GetComponent<Projectile>().damage(gameObject);
+            }
+            
+            StartCoroutine(onHit());  
+        }
+        
     }
 
     // Walljump stuff
@@ -280,8 +287,19 @@ public class Player : MonoBehaviour
 
         if (InvSec >= maxInvSec)
         {
-            HealthBar[health - 1].GetComponent<Health>().FireOff();
-            health -= enemy.GetComponent<Enemy>().getDamage();
+            if (health-1 >= 0)
+            {
+                HealthBar[health - 1].GetComponent<Health>().FireOff();
+            }
+            if (enemy.GetComponent<Enemy>() != null)
+            {
+                health -= enemy.GetComponent<Enemy>().getDamage();
+            } 
+            else
+            {
+                health -= 1;
+            }
+            
             Debug.Log("After damage taken, Health:" + health);
             InvSec = 0;
         }
@@ -290,8 +308,33 @@ public class Player : MonoBehaviour
             Debug.Log("didnt take damage, still invincible");
         }
     }
+    public IEnumerator onHit()
+    {
+        //returned if hit an enemy, for downward slash boost 
+        // Other ideas:
+        // soul/mana meter
+        // lifesteal
+        if (attHitBoxD.enabled == true)
+        {
+            //boost logic
+            if (rb.linearVelocityY <= 0)
+            {
+                rb.linearVelocityY = 0;
+            }
+            rb.linearVelocityY += DsBoost;
+            yield return new WaitForSeconds(0.15f);
+        }
+    }
 
     public int getDamage() {
+        return 1;
+    }
+    public int getDirection()
+    {
+        if (transform.eulerAngles.y != 0)
+        {
+            return -1;
+        }
         return 1;
     }
     

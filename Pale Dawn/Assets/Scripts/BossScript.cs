@@ -20,6 +20,12 @@ public class BossScript : MonoBehaviour
     string[] Abilities = new string[5];
     string nextMove = null;
 
+    [Header("Other stats")]
+    [SerializeField] private int maxHealth;
+    private int health;
+    [SerializeField] private float maxInvSec;
+    private float InvSec = 0;
+
     [Header("Time between moves")]
     [SerializeField] float moveTimeBase;
     [SerializeField] float moveTimeVarience;
@@ -28,11 +34,16 @@ public class BossScript : MonoBehaviour
     [SerializeField] Transform floorCheckPos;
     [SerializeField] GameObject[] IdleFollow;
     [SerializeField] Transform[] ability1Nodes;
+    [SerializeField] Transform ability2Node;
 
     [Header("Prefabs")]
     [SerializeField] GameObject A1Projectile;
+    [SerializeField] GameObject A2Projectile;
+    [Header("Player Info")]
+    [SerializeField] GameObject player;
     float hTime;
     LayerMask LmG;
+
     void Start()
     {
         LmG = LayerMask.GetMask("Ground");
@@ -42,6 +53,7 @@ public class BossScript : MonoBehaviour
         Abilities[3] = "Ability4";
         Abilities[4] = "Ability5";
         isIdle = true;
+        health = maxHealth;
     }
     void FixedUpdate()
     {
@@ -52,7 +64,7 @@ public class BossScript : MonoBehaviour
         {
             transform.position = Vector2.MoveTowards(new Vector2(transform.position.x, height), new Vector2(IdleFollow[curNode].transform.position.x, height), speed * temp);
 
-            if (dist < 4f)
+            if (dist < 2f)
             {
                 curNode++;
                 if (curNode >= IdleFollow.Length)
@@ -66,6 +78,9 @@ public class BossScript : MonoBehaviour
 
     void Update()
     {
+        InvSec += Time.deltaTime;
+
+
         if (moveTimer <= 0)
         {
             if (nextMove != null)
@@ -75,7 +90,8 @@ public class BossScript : MonoBehaviour
             }
             moveTimer = moveTimeBase + UnityEngine.Random.Range(-moveTimeVarience, moveTimeVarience);
             // nextMove = Abilities[UnityEngine.Random.Range(0, Abilities.Count())];
-            nextMove = "Ability1"; //test specific move
+            nextMove = Abilities[UnityEngine.Random.Range(0, 2)];
+            // nextMove = "Ability2"; //test specific move
             Debug.Log("Timer: " + moveTimer + ", next move: " + nextMove);
         }
         else
@@ -124,29 +140,37 @@ public class BossScript : MonoBehaviour
     private IEnumerator Ability1() //slam
     {
         Debug.Log("Ability 1: slam");
-        Vector2 startPos = transform.position;
-        StartCoroutine(MoveToNode(ability1Nodes[0].position,0.2f));
+        Vector2 startPos = transform.position; //save start position for returning later
+
+        StartCoroutine(MoveToNode(ability1Nodes[0].position,0.2f)); //move to slam position (change from nodes to dynamic)
         yield return new WaitUntil(() => !goingToNode);
         yield return new WaitForSeconds(0.1f);
-        StartCoroutine(MoveToNode(ability1Nodes[1].position, 0.5f));
+
+        StartCoroutine(MoveToNode(ability1Nodes[1].position, 0.5f)); //move slightly up
         yield return new WaitUntil(() => !goingToNode);
-        yield return new WaitForSeconds(0.5f);
-        RaycastHit2D hit = Physics2D.Raycast(floorCheckPos.position, new Vector2(0, -20), 40, LmG);
+        yield return new WaitForSeconds(0.5f); //cooldown before slam
+
+        RaycastHit2D hit = Physics2D.Raycast(floorCheckPos.position, new Vector2(0, -20), 40, LmG); //find floor height
         Debug.Log("Hit position:" + hit.point);
         Debug.DrawLine(transform.position, hit.point, Color.azure, 1.5f);
         float yDist = Vector2.Distance(floorCheckPos.position, hit.point);
-        StartCoroutine(MoveToNode(hit.point+new Vector2(0,2), yDist/5));
+        StartCoroutine(MoveToNode(hit.point+new Vector2(0,2), yDist/5)); //move to slam
         yield return new WaitUntil(() => !goingToNode);
-        yield return new WaitForSeconds(1.75f);
-        // big hitbox area (maybe sliding floor projectiles?)
+
+        //sliding floor projectiles
+        Instantiate(A1Projectile, ability1Nodes[2].position, ability1Nodes[2].rotation).GetComponent<Projectile>().setDirection(-1);
+        Instantiate(A1Projectile, ability1Nodes[3].position, ability1Nodes[3].rotation).GetComponent<Projectile>().setDirection(1);
+        yield return new WaitForSeconds(1.75f);// time to dodge and attack
+
+
         StartCoroutine(MoveToNode(startPos, 0.3f));
         yield return new WaitUntil(() => !goingToNode);
         isIdle = true;
     }
-    private IEnumerator Ability2()
+    private IEnumerator Ability2() //shoot projectiles
     {
-        Debug.Log("Ability 2");
-        yield return new WaitForSeconds(1f);
+        Instantiate(A2Projectile, ability2Node.position, ability2Node.rotation).GetComponent<Projectile>().setTarget(player, gameObject);
+        yield return new WaitForSeconds(2f);//stall for long enough to have reflect hit
         isIdle = true;
     }
     private IEnumerator Ability3()
@@ -181,5 +205,42 @@ public class BossScript : MonoBehaviour
         }
         goingToNode = false;
     }
+
+    public void damage(GameObject player)
+    {
+        // Debug.Log("Damage recived, sent by " + player);
+        // Debug.Log("Before damage, Health:" + health);
+
+        if (InvSec >= maxInvSec)
+        {
+            health -= player.GetComponent<Player>().getDamage();
+            Debug.Log("After damage taken, Health:" + health);
+            InvSec = 0;
+        }
+        else
+        {
+            Debug.Log("didnt take damage, still invincible");
+        }
+    }
+
+    public bool dead()
+    {
+        if (health <= 0)
+        {
+            return true;
+        } 
+        else
+        {
+            return false; 
+        }
+    }
     
+    public int getHealth()
+    {
+        return health;
+    }
+    public float getHealthPercent()
+    {
+        return (float) health/maxHealth;
+    }
 }
