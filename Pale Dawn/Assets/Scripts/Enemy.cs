@@ -16,6 +16,7 @@ public class Enemy : MonoBehaviour
     protected GameObject target;
     protected float InvSec = 0;
     protected bool shouldSwing;
+    protected bool pushback = false;
 
 
 
@@ -83,6 +84,8 @@ public class Enemy : MonoBehaviour
             spriteRenderer.color = new Vector4(1, 1, 1, 1);
             yield return new WaitForSeconds(.1f);
         }
+
+        pushback = false;
     }
 
     protected virtual IEnumerator swing()
@@ -101,6 +104,8 @@ public class Enemy : MonoBehaviour
 
     protected virtual void FixedUpdate()
     {
+        if (pushback) return;
+
         if (!shouldSwing)
         {
             rb.linearVelocity = new Vector2(speed * direction, rb.linearVelocity.y);
