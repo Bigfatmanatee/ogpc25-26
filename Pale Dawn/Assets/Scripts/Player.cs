@@ -22,7 +22,11 @@ public class Player : MonoBehaviour
     [SerializeField] private Collider2D attHitBox;
     [SerializeField] private Collider2D attHitBoxU;
     [SerializeField] private Collider2D attHitBoxD;
+    [SerializeField] private Transform wjHitBox; // walljump hitbox
     [SerializeField] private Transform groundCheck;
+    [SerializeField] private Animator animator;
+    [SerializeField] private ParticleSystem wjParticles;
+    [SerializeField] private StopTime timeManager;
 
 
     [SerializeField] private float speed;
@@ -109,6 +113,15 @@ public class Player : MonoBehaviour
     private void Update()
     {
         m_PlayerMovement = m_MoveAction.ReadValue<Vector2>();
+
+        if(m_PlayerMovement != Vector2.zero)
+        {
+            animator.SetFloat("Speed", 1f); //Walking
+        }
+        else
+        {
+            animator.SetFloat("Speed", 0f); //Idle
+        }
         //if (m_PlayerMovement != Vector2.zero)
         //    Debug.Log("Vector = " + m_PlayerMovement);
 
@@ -152,10 +165,16 @@ public class Player : MonoBehaviour
         if (Mathf.Approximately(jumpRead, 1f))
             jumping = true;
 
-
-        if (m_JumpAction.WasPressedThisFrame() && isGrounded()) //normal jumping
+        if (m_JumpAction.WasPressedThisFrame()) //normal jumping
         {
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpPower);
+            if (isGrounded()) 
+                rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpPower);
+            if (wjHitBox.GetComponent<WJCollider>().collidingWithWall)
+            {
+                print("walljump");
+                rb.linearVelocity = new Vector2(-transform.right.x * 10f, jumpPower);
+                wjParticles.Emit(15);
+            }
         }
         if (m_JumpAction.WasReleasedThisFrame() && rb.linearVelocity.y > 0f) //slow down when stop holding space
         {
@@ -179,7 +198,7 @@ public class Player : MonoBehaviour
     private void FixedUpdate()
     {
         
-        rb.linearVelocity = new Vector2(m_PlayerMovement.x * speed, rb.linearVelocity.y);
+        rb.linearVelocity = new Vector2(Mathf.Lerp(rb.linearVelocityX, m_PlayerMovement.x * speed, 8 * Time.deltaTime), rb.linearVelocity.y);
         
         if (rb.linearVelocityX > 0) //Facing direction
         {
@@ -235,6 +254,7 @@ public class Player : MonoBehaviour
         //this has access to enemy hitbox gameobject, create another script to pass through damage
         var Host = enemy.GetComponent<HitboxPass>().passHost();
         Host.GetComponent<Enemy>().damage(gameObject);
+        timeManager.Pause(.1f);
     }
     public void spark()
     {
@@ -242,6 +262,15 @@ public class Player : MonoBehaviour
 
 
         //raycast in directing of swing, if it hits a wall then spawn sparks at collision point
+    }
+
+    // Walljump stuff
+    public void walljump()
+    {
+        if (wjHitBox.GetComponent<WJCollider>().collidingWithWall)
+        {
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpPower*0.5f);
+        }
     }
 
     public void damage(GameObject enemy)

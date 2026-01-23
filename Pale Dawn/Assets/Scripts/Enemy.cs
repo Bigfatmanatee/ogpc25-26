@@ -16,6 +16,7 @@ public class Enemy : MonoBehaviour
     protected GameObject target;
     protected float InvSec = 0;
     protected bool shouldSwing;
+    protected bool pushback = false;
 
 
 
@@ -83,9 +84,11 @@ public class Enemy : MonoBehaviour
             spriteRenderer.color = new Vector4(1, 1, 1, 1);
             yield return new WaitForSeconds(.1f);
         }
+
+        pushback = false;
     }
 
-    protected IEnumerator swing()
+    protected virtual IEnumerator swing()
     {
         //play animation
         anim.SetBool("attacking", true);
@@ -101,6 +104,8 @@ public class Enemy : MonoBehaviour
 
     protected virtual void FixedUpdate()
     {
+        if (pushback) return;
+
         if (!shouldSwing)
         {
             rb.linearVelocity = new Vector2(speed * direction, rb.linearVelocity.y);
@@ -151,7 +156,7 @@ public class Enemy : MonoBehaviour
         }
 
     }
-    public void damage(GameObject player)
+    public virtual void damage(GameObject player)
     {
         // Debug.Log("Damage recived, sent by " + player);
         // Debug.Log("Before damage, Health:" + health);
