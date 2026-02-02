@@ -11,7 +11,6 @@ public class Player : MonoBehaviour
     private InputAction m_MoveAction;
     private InputAction m_AttackAction;
     private InputAction m_JumpAction;
-    // private bool facingL;
     private float sinceLastSwing = 0;
     private Rigidbody2D rb;
     private LayerMask LmG; //Ground layer mask
@@ -42,10 +41,13 @@ public class Player : MonoBehaviour
     private float InvSec = 0;
     private bool isSwinging = false;
 
-    [SerializeField] private GameObject[] HealthBar;
+    [Header("Other Refrences")]
+    [SerializeField] private GameObject[] HealthBar; //swap out for a single health manager file
     [SerializeField] private Animator swingAnimator;
+    [SerializeField] private GameObject swingManager;
+    private float swingOffset = 0.75f;
 
-
+    [Header("Control settings")]
     [SerializeField] private float deadzone = 0.4f; //deadzone % (between 0.0 - 1.0) 
 
 
@@ -85,23 +87,21 @@ public class Player : MonoBehaviour
         m_JumpAction.AddBinding("<Gamepad>/buttonSouth");
         m_JumpAction.AddBinding("<Keyboard>/k");
         m_JumpAction.Enable();
-
-        // OnDisable();
     }
 
     private void Awake()
     {
-        // OnEnable();
+        
     }
 
-    // private void OnEnable()
+    // private void Enable()
     // {
     //     m_MoveAction.Enable();
     //     m_AttackAction.Enable();
     //     m_JumpAction.Enable();
     // }
 
-    // private void OnDisable()
+    // private void Disable()
     // {
     //     m_MoveAction.Disable();
     //     m_AttackAction.Disable();
@@ -125,8 +125,6 @@ public class Player : MonoBehaviour
         {
             animator.SetFloat("Speed", 0f); //Idle
         }
-        //if (m_PlayerMovement != Vector2.zero)
-        //    Debug.Log("Vector = " + m_PlayerMovement);
 
         float dist = 1.8f;
         Vector3 dir = new Vector3(dist,0,0);
@@ -149,7 +147,6 @@ public class Player : MonoBehaviour
         }
         Debug.DrawLine(transform.position, transform.position + dir, c, 0.005f);
 
-        var attacking = m_AttackAction.ReadValue<float>(); //temp attack code
         if (m_AttackAction.WasPressedThisFrame() && sinceLastSwing >= swingCooldown)
         {
             StartCoroutine(swing());
@@ -226,16 +223,24 @@ public class Player : MonoBehaviour
         if (m_PlayerMovement.y > deadzone)
         {
             attHitBoxU.enabled = true;
-            // Debug.DrawLine(transform.position, transform.position + new Vector3(0, 1, 0), Color.aliceBlue, swingTime);
+            swingManager.GetComponent<SwingAnim>().setPos(attHitBoxU.transform,90,0,swingOffset);
         }
         else if (m_PlayerMovement.y < -deadzone)
         {
             attHitBoxD.enabled = true;
-            // Debug.DrawLine(transform.position, transform.position + new Vector3(0, -1, 0), Color.aliceBlue, swingTime);
+            swingManager.GetComponent<SwingAnim>().setPos(attHitBoxD.transform,-90,0,-swingOffset);
         }
         else
         {
             attHitBox.enabled = true;
+            if (transform.eulerAngles.y != 0)
+            {
+                swingManager.GetComponent<SwingAnim>().setPos(attHitBox.transform,180,-swingOffset,0); //flip instead of rotate?
+            } else
+            {
+                swingManager.GetComponent<SwingAnim>().setPos(attHitBox.transform,0,swingOffset,0);
+            }
+            
             
         }
         yield return new WaitForSeconds(swingTime);

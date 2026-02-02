@@ -168,6 +168,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AttColider
   Host: {fileID: 5195596319383144346}
   hostIsPlayer: 1
+  overrideTrigger: 0
 --- !u!1 &1989297073099644804
 GameObject:
   m_ObjectHideFlags: 0
@@ -375,6 +376,7 @@ GameObject:
   - component: {fileID: 3993120580282760043}
   - component: {fileID: 3962650141672515016}
   - component: {fileID: 7770086229232934707}
+  - component: {fileID: 6903809159893615419}
   m_Layer: 0
   m_Name: Slash_color4_frame1_0
   m_TagString: Untagged
@@ -478,6 +480,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &6903809159893615419
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2327918628683464607}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eae659e901d3b8d43842bd4b5ccbecf1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
 --- !u!1 &3040292947590443372
 GameObject:
   m_ObjectHideFlags: 0
@@ -5407,6 +5421,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AttColider
   Host: {fileID: 5195596319383144346}
   hostIsPlayer: 1
+  overrideTrigger: 0
 --- !u!1 &4100146889609503726
 GameObject:
   m_ObjectHideFlags: 0
@@ -15513,6 +15528,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   swingAnimator: {fileID: 7770086229232934707}
+  swingManager: {fileID: 2327918628683464607}
   deadzone: 0.2
 --- !u!50 &824300097569937476
 Rigidbody2D:
