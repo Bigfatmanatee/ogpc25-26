@@ -6016,6 +6016,28 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!1 &627970599 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2809709616346962703, guid: 152dba935a00cbe47b98ba481e1501fd, type: 3}
+  m_PrefabInstance: {fileID: 2093800491}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &627970601
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 627970599}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 748fb590b04b2471c960fc3c8a6158f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  player: {fileID: 1563933595}
+  Health:
+  - {fileID: 2093800494}
+  - {fileID: 2093800493}
+  - {fileID: 2093800492}
 --- !u!114 &640262294 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1202723299413732174, guid: 152dba935a00cbe47b98ba481e1501fd, type: 3}
@@ -11378,6 +11400,10 @@ PrefabInstance:
       value: 1.25
       objectReference: {fileID: 0}
     - target: {fileID: 5401654345463992669, guid: 75993c777a2b02d42afbddfd7a2b62f7, type: 3}
+      propertyPath: HealthManager
+      value: 
+      objectReference: {fileID: 627970599}
+    - target: {fileID: 5401654345463992669, guid: 75993c777a2b02d42afbddfd7a2b62f7, type: 3}
       propertyPath: HealthBar.Array.size
       value: 3
       objectReference: {fileID: 0}
@@ -16446,7 +16472,7 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 2809709616346962703, guid: 152dba935a00cbe47b98ba481e1501fd, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 2093800496}
+      addedObject: {fileID: 627970601}
     - targetCorrespondingSourceObject: {fileID: 2181323042885507186, guid: 152dba935a00cbe47b98ba481e1501fd, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1669433440}
@@ -16466,25 +16492,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 240587315194699848, guid: 152dba935a00cbe47b98ba481e1501fd, type: 3}
   m_PrefabInstance: {fileID: 2093800491}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &2093800495 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2809709616346962703, guid: 152dba935a00cbe47b98ba481e1501fd, type: 3}
-  m_PrefabInstance: {fileID: 2093800491}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &2093800496
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2093800495}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 748fb590b04b2471c960fc3c8a6158f2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: '::'
-  player: {fileID: 0}
-  Health: []
 --- !u!1 &2120633068
 GameObject:
   m_ObjectHideFlags: 0

@@ -41,12 +41,11 @@ public class Player : MonoBehaviour
     private float InvSec = 0;
     private bool isSwinging = false;
 
-<<<<<<< Updated upstream
+
     [Header("Other Refrences")]
     [SerializeField] private GameObject[] HealthBar; //swap out for a single health manager file
-=======
     [SerializeField] private GameObject HealthManager;
->>>>>>> Stashed changes
+
     [SerializeField] private Animator swingAnimator;
     [SerializeField] private GameObject swingManager;
     private float swingOffset = 0.75f;
