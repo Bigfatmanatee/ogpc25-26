@@ -13,7 +13,7 @@ public class HealthManager : MonoBehaviour
     {
         maxHealth = player.GetComponent<Player>().getMaxHealth();
         curHealth = player.GetComponent<Player>().getMaxHealth();
-        healthObjs = Health.Length; //if length doesnt count 0, then change for loop to be healthObjs-1
+        healthObjs = Health.Length;
 
         if (maxHealth > healthObjs)
         {
@@ -22,7 +22,7 @@ public class HealthManager : MonoBehaviour
         {
             for (int i = healthObjs; i > maxHealth; i--)
             {
-                Health[i].GetComponent<Health>().Hide();
+                Health[i-1].GetComponent<Health>().Hide();
             }
         }
     }
