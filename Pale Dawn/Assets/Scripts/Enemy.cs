@@ -7,7 +7,6 @@ public class Enemy : MonoBehaviour
     [SerializeField] protected float speed = 5;
     [SerializeField] protected int maxHealth = 5;
     [SerializeField] protected int health = 5;
-    [SerializeField] protected int damageNum = 1;
 
     [SerializeField] protected float attTime;
     [SerializeField] protected float attCooldown;
@@ -205,10 +204,6 @@ public class Enemy : MonoBehaviour
     public string getTarget()
     {
         return "Player";
-    }
-    public int getDamage()
-    {
-        return damageNum;
     }
     public void die()
     {

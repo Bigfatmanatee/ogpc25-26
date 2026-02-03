@@ -41,8 +41,12 @@ public class Player : MonoBehaviour
     private float InvSec = 0;
     private bool isSwinging = false;
 
+<<<<<<< Updated upstream
     [Header("Other Refrences")]
     [SerializeField] private GameObject[] HealthBar; //swap out for a single health manager file
+=======
+    [SerializeField] private GameObject HealthManager;
+>>>>>>> Stashed changes
     [SerializeField] private Animator swingAnimator;
     [SerializeField] private GameObject swingManager;
     private float swingOffset = 0.75f;
@@ -294,17 +298,9 @@ public class Player : MonoBehaviour
         {
             if (health-1 >= 0)
             {
-                HealthBar[health - 1].GetComponent<Health>().FireOff();
+                HealthManager.GetComponent<HealthManager>().damage();
             }
-            if (enemy.GetComponent<Enemy>() != null)
-            {
-                health -= enemy.GetComponent<Enemy>().getDamage();
-            } 
-            else
-            {
-                health -= 1;
-            }
-            
+            health -= 1;
             Debug.Log("After damage taken, Health:" + health);
             InvSec = 0;
         }
@@ -341,6 +337,14 @@ public class Player : MonoBehaviour
             return -1;
         }
         return 1;
+    }
+    public int getMaxHealth()
+    {
+        return maxHealth;
+    }
+    public int getCurHealth()
+    {
+        return health;
     }
     
 }
