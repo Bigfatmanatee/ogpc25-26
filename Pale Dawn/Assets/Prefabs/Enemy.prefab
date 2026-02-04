@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6849336699277616769}
   - component: {fileID: 6785075840298546309}
   - component: {fileID: 1292706458120222781}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -54,7 +54,6 @@ MonoBehaviour:
   speed: 3
   maxHealth: 5
   health: 5
-  damageNum: 1
   attTime: 0.5
   attCooldown: 1
   maxInvSec: 1
@@ -344,6 +343,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AttColider
   Host: {fileID: 1975899303137501922}
   hostIsPlayer: 0
+  overrideTrigger: 0
 --- !u!1 &4023726969043255083
 GameObject:
   m_ObjectHideFlags: 0

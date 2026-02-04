@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Linq.Expressions;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
@@ -14,7 +15,8 @@ public class Player : MonoBehaviour
     private float sinceLastSwing = 0;
     private Rigidbody2D rb;
     private LayerMask LmG; //Ground layer mask
-    private LayerMask LmE; //Enemy layer mask
+    private LayerMask LmC; //enemy collision layer mask
+    private LayerMask LmE; //Enemy hitbox layer mask
     private LayerMask LmA; //Attack layer mask
     [Header("Hitboxes")]
 
@@ -43,7 +45,6 @@ public class Player : MonoBehaviour
 
 
     [Header("Other Refrences")]
-    [SerializeField] private GameObject[] HealthBar; //swap out for a single health manager file
     [SerializeField] private GameObject HealthManager;
 
     [SerializeField] private Animator swingAnimator;
@@ -60,6 +61,7 @@ public class Player : MonoBehaviour
         health = maxHealth;
         rb = GetComponent<Rigidbody2D>();
         LmG = LayerMask.GetMask("Ground");
+        LmC = LayerMask.GetMask("EnemyCol");
         LmE = LayerMask.GetMask("EnemyHit");
         LmA = LayerMask.GetMask("Attack");
 
@@ -113,7 +115,7 @@ public class Player : MonoBehaviour
 
     private bool isGrounded()
     {
-        return Physics2D.OverlapCircle(groundCheck.position, 0.2f, LmG);
+        return Physics2D.OverlapCircle(groundCheck.position, 0.2f, LmG) || Physics2D.OverlapCircle(groundCheck.position, 0.2f, LmC);
     }
 
     private void Update()
@@ -172,7 +174,7 @@ public class Player : MonoBehaviour
         {
             if (isGrounded()) 
                 rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpPower);
-            if (wjHitBox.GetComponent<WJCollider>().collidingWithWall)
+            else if (wjHitBox.GetComponent<WJCollider>().collidingWithWall)
             {
                 print("walljump");
                 rb.linearVelocity = new Vector2(-transform.right.x * 10f, jumpPower);
@@ -279,14 +281,14 @@ public class Player : MonoBehaviour
         
     }
 
-    // Walljump stuff
-    public void walljump()
-    {
-        if (wjHitBox.GetComponent<WJCollider>().collidingWithWall)
-        {
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpPower*0.5f);
-        }
-    }
+    // // Walljump stuff
+    // public void walljump()
+    // {
+    //     if (wjHitBox.GetComponent<WJCollider>().collidingWithWall && !isGrounded())
+    //     {
+    //         rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpPower*0.5f);
+    //     }
+    // }
 
     public void damage(GameObject enemy)
     {
@@ -295,9 +297,13 @@ public class Player : MonoBehaviour
 
         if (InvSec >= maxInvSec)
         {
-            if (health-1 >= 0)
+            if (health-1 > 0)
             {
                 HealthManager.GetComponent<HealthManager>().damage();
+            } 
+            else
+            {
+                die();
             }
             health -= 1;
             Debug.Log("After damage taken, Health:" + health);
@@ -324,6 +330,10 @@ public class Player : MonoBehaviour
             rb.linearVelocityY += DsBoost;
             yield return new WaitForSeconds(0.15f);
         }
+    }
+    private void die()
+    {
+        throw new NotImplementedException();
     }
 
     public int getDamage() {

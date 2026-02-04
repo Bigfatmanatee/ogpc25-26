@@ -22,6 +22,8 @@ public class Health : MonoBehaviour
     public void Hide()
     {
         sprite.enabled = false;
+        fire.Stop();
+        fire.Clear();
     }
     public void Show()
     {

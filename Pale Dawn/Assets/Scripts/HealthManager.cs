@@ -29,7 +29,7 @@ public class HealthManager : MonoBehaviour
 
     public void damage()
     {
-        Health[curHealth].GetComponent<Health>().Hide();
         curHealth -= 1;
+        Health[curHealth].GetComponent<Health>().FireOff();
     }
 }
