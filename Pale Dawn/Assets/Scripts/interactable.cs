@@ -1,24 +1,47 @@
+using System;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class interactable : MonoBehaviour
 {
     //a way to read input, maybe global call when holding up/down or player function to search for nearby interactables
-    //remove gravity to float in place, move through tp so you cant gain speed, make sure gravity always gets set to normal after leaving ladder to stop glitches
+    public static UnityEvent m_Interact;
+    private Collider2D AreaTrigger;
+    private GameObject target;
 
 
 
 
-
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        AreaTrigger = GetComponent<Collider2D>();
+        if (m_Interact == null)
+            m_Interact = new UnityEvent();
+
+        m_Interact.AddListener(OnEventTriggered);
     }
 
-    // Update is called once per frame
-    void Update()
+    protected virtual void Update() {}
+
+    protected void OnEventTriggered()
     {
-        
+        if (target != null)
+        {
+            interact();
+        }
     }
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        target = collision.gameObject;
+    }
+    void OnTriggerExit2D(Collider2D collision)
+    {
+        target = null;
+    }
+
+    protected virtual void interact()
+    {
+        throw new NotImplementedException();
+    }
+
 }

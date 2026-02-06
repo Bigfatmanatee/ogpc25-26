@@ -96,7 +96,7 @@ public class Player : MonoBehaviour
 
     private void Awake()
     {
-        
+        interactable.m_Interact.Invoke();
     }
 
     // private void Enable()
