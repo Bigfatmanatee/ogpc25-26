@@ -1,0 +1,613 @@
+fileFormatVersion: 2
+guid: b6b317f3a1586419faa92334c29b2ba5
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -5336127379540435212
+    second: CandleHealthAll_0
+  - first:
+      213: -5044271305893534055
+    second: CandleHealthAll_1
+  - first:
+      213: -4257166733189497926
+    second: CandleHealthAll_2
+  - first:
+      213: 5091162424816917837
+    second: CandleHealthAll_3
+  - first:
+      213: -1534469525981587462
+    second: CandleHealthAll_4
+  - first:
+      213: 6250535028590086036
+    second: CandleHealthAll_5
+  - first:
+      213: 1200399766537871427
+    second: CandleHealthAll_6
+  - first:
+      213: 8799860589642833623
+    second: CandleHealthAll_7
+  - first:
+      213: -747508350782625942
+    second: CandleHealthAll_8
+  - first:
+      213: 747073348793123549
+    second: CandleHealthAll_9
+  - first:
+      213: 7642589345501828526
+    second: CandleHealthAll_10
+  - first:
+      213: 5307788709116527103
+    second: CandleHealthAll_11
+  - first:
+      213: 3801742417552291839
+    second: CandleHealthAll_12
+  - first:
+      213: -5831611505891744345
+    second: CandleHealthAll_13
+  - first:
+      213: 8284324105734498944
+    second: CandleHealthAll_14
+  - first:
+      213: -1562343652984748070
+    second: CandleHealthAll_15
+  - first:
+      213: 3424229887786204962
+    second: CandleHealthAll_16
+  - first:
+      213: -4532008058636027487
+    second: CandleHealthAll_17
+  - first:
+      213: -6139289919206062118
+    second: CandleHealthAll_18
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 1
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: CandleHealthAll_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 69
+        width: 13
+        height: 32
+      alignment: 9
+      pivot: {x: 0.5, y: 0.921875}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4fe914a9b6442f5b0800000000000000
+      internalID: -5336127379540435212
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CandleHealthAll_1
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 92
+        width: 8
+        height: 9
+      alignment: 9
+      pivot: {x: 0.4375, y: 0.16666667}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 996258519f52ff9b0800000000000000
+      internalID: -5044271305893534055
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CandleHealthAll_2
+      rect:
+        serializedVersion: 2
+        x: 30
+        y: 71
+        width: 13
+        height: 30
+      alignment: 9
+      pivot: {x: 0.5, y: 0.9166667}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: abb31ae59618be4c0800000000000000
+      internalID: -4257166733189497926
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CandleHealthAll_3
+      rect:
+        serializedVersion: 2
+        x: 46
+        y: 91
+        width: 9
+        height: 10
+      alignment: 9
+      pivot: {x: 0.5, y: 0.15}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d4d5701504177a640800000000000000
+      internalID: 5091162424816917837
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CandleHealthAll_4
+      rect:
+        serializedVersion: 2
+        x: 59
+        y: 64
+        width: 13
+        height: 37
+      alignment: 9
+      pivot: {x: 0.5, y: 0.9324324}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: af79439981874bae0800000000000000
+      internalID: -1534469525981587462
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CandleHealthAll_5
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 81
+        width: 8
+        height: 8
+      alignment: 9
+      pivot: {x: 0.4375, y: 0.1875}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4978f33ed7c5eb650800000000000000
+      internalID: 6250535028590086036
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CandleHealthAll_6
+      rect:
+        serializedVersion: 2
+        x: 46
+        y: 78
+        width: 9
+        height: 10
+      alignment: 9
+      pivot: {x: 0.6111111, y: 0.15}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 340a3f84a3da8a010800000000000000
+      internalID: 1200399766537871427
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CandleHealthAll_7
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 70
+        width: 9
+        height: 8
+      alignment: 9
+      pivot: {x: 0.2777778, y: 0.1875}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7dede9625926f1a70800000000000000
+      internalID: 8799860589642833623
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CandleHealthAll_8
+      rect:
+        serializedVersion: 2
+        x: 46
+        y: 65
+        width: 7
+        height: 10
+      alignment: 9
+      pivot: {x: 0.64285713, y: 0.15}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a67a6fc8d1150a5f0800000000000000
+      internalID: -747508350782625942
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CandleHealthAll_9
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 60
+        width: 11
+        height: 7
+      alignment: 9
+      pivot: {x: 0.3181818, y: 0.21428572}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dd2c9f7a0432e5a00800000000000000
+      internalID: 747073348793123549
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CandleHealthAll_10
+      rect:
+        serializedVersion: 2
+        x: 46
+        y: 51
+        width: 7
+        height: 11
+      alignment: 9
+      pivot: {x: 0.5, y: 0.13636364}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ea552de748eef0a60800000000000000
+      internalID: 7642589345501828526
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CandleHealthAll_11
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 51
+        width: 11
+        height: 6
+      alignment: 9
+      pivot: {x: 0.3181818, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ff148b585bd09a940800000000000000
+      internalID: 5307788709116527103
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CandleHealthAll_12
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 40
+        width: 11
+        height: 8
+      alignment: 9
+      pivot: {x: 0.4090909, y: 0.1875}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ff73db5169082c430800000000000000
+      internalID: 3801742417552291839
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CandleHealthAll_13
+      rect:
+        serializedVersion: 2
+        x: 46
+        y: 37
+        width: 7
+        height: 11
+      alignment: 9
+      pivot: {x: 0.35714287, y: 0.13636364}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7a5ed3b8b34f11fa0800000000000000
+      internalID: -5831611505891744345
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CandleHealthAll_14
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 27
+        width: 10
+        height: 10
+      alignment: 9
+      pivot: {x: 0.45, y: 0.15}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 08aa286c1e4d7f270800000000000000
+      internalID: 8284324105734498944
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CandleHealthAll_15
+      rect:
+        serializedVersion: 2
+        x: 46
+        y: 24
+        width: 7
+        height: 10
+      alignment: 9
+      pivot: {x: 0.35714287, y: 0.15}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ad702caa9b0715ae0800000000000000
+      internalID: -1562343652984748070
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CandleHealthAll_16
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 15
+        width: 9
+        height: 9
+      alignment: 9
+      pivot: {x: 0.5, y: 0.16666667}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 22fb5cac0fe458f20800000000000000
+      internalID: 3424229887786204962
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CandleHealthAll_17
+      rect:
+        serializedVersion: 2
+        x: 46
+        y: 12
+        width: 9
+        height: 9
+      alignment: 9
+      pivot: {x: 0.3888889, y: 0.16666667}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1a9bac9aea21b11c0800000000000000
+      internalID: -4532008058636027487
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CandleHealthAll_18
+      rect:
+        serializedVersion: 2
+        x: 46
+        y: 0
+        width: 10
+        height: 9
+      alignment: 9
+      pivot: {x: 0.45, y: 0.16666667}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ad70698885cdccaa0800000000000000
+      internalID: -6139289919206062118
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: e36cd523d24c3480eaeaa9c02a254a11
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":3.0,"y":3.0},"gridSpriteSize":{"x":13.0,"y":44.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":3.0,"y":3.0},"pivot":{"x":0.5,"y":0.0},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":7,"pivotUnitMode":0,"slicingType":0,"keepEmptyRects":false,"isAlternate":false}'
+    nameFileIdTable:
+      CandleHealthAll_0: -5336127379540435212
+      CandleHealthAll_1: -5044271305893534055
+      CandleHealthAll_10: 7642589345501828526
+      CandleHealthAll_11: 5307788709116527103
+      CandleHealthAll_12: 3801742417552291839
+      CandleHealthAll_13: -5831611505891744345
+      CandleHealthAll_14: 8284324105734498944
+      CandleHealthAll_15: -1562343652984748070
+      CandleHealthAll_16: 3424229887786204962
+      CandleHealthAll_17: -4532008058636027487
+      CandleHealthAll_18: -6139289919206062118
+      CandleHealthAll_2: -4257166733189497926
+      CandleHealthAll_3: 5091162424816917837
+      CandleHealthAll_4: -1534469525981587462
+      CandleHealthAll_5: 6250535028590086036
+      CandleHealthAll_6: 1200399766537871427
+      CandleHealthAll_7: 8799860589642833623
+      CandleHealthAll_8: -747508350782625942
+      CandleHealthAll_9: 747073348793123549
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
