@@ -8,6 +8,9 @@ using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
+
+    public static Player Instance { get; private set; }
+    public float interact;
     private Vector2 m_PlayerMovement;
     private InputAction m_MoveAction;
     private InputAction m_AttackAction;
@@ -52,7 +55,7 @@ public class Player : MonoBehaviour
     private float swingOffset = 0.75f;
 
     [Header("Control settings")]
-    [SerializeField] private float deadzone = 0.4f; //deadzone % (between 0.0 - 1.0) 
+    [SerializeField] public float deadzone = 0.4f; //deadzone % (between 0.0 - 1.0) 
 
 
 
@@ -96,7 +99,14 @@ public class Player : MonoBehaviour
 
     private void Awake()
     {
-        interactable.m_Interact.Invoke();
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
     // private void Enable()
@@ -121,8 +131,9 @@ public class Player : MonoBehaviour
     private void Update()
     {
         m_PlayerMovement = m_MoveAction.ReadValue<Vector2>();
+        interact = m_PlayerMovement.y;
 
-        if(m_PlayerMovement != Vector2.zero)
+        if(m_PlayerMovement.x != 0) //was m_PlayerMovement != Vector2.zero
         {
             animator.SetFloat("Speed", 1f); //Walking
         }
@@ -131,6 +142,7 @@ public class Player : MonoBehaviour
             animator.SetFloat("Speed", 0f); //Idle
         }
 
+        // draw directional swing guide
         float dist = 1.8f;
         Vector3 dir = new Vector3(dist,0,0);
         if (transform.eulerAngles.y != 0)
@@ -152,6 +164,7 @@ public class Player : MonoBehaviour
         }
         Debug.DrawLine(transform.position, transform.position + dir, c, 0.005f);
 
+        // swing code
         if (m_AttackAction.WasPressedThisFrame() && sinceLastSwing >= swingCooldown)
         {
             StartCoroutine(swing());
@@ -164,19 +177,19 @@ public class Player : MonoBehaviour
 
 
 
-
+        // jumping code
         bool jumping = false;
         var jumpRead = m_JumpAction.ReadValue<float>();
         if (Mathf.Approximately(jumpRead, 1f))
             jumping = true;
 
-        if (m_JumpAction.WasPressedThisFrame()) //normal jumping
+        if (m_JumpAction.WasPressedThisFrame()) 
         {
-            if (isGrounded()) 
+            if (isGrounded()) //normal jumping
                 rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpPower);
-            else if (wjHitBox.GetComponent<WJCollider>().collidingWithWall)
+            else if (wjHitBox.GetComponent<WJCollider>().collidingWithWall) //walljump
             {
-                print("walljump");
+                // print("walljump");
                 rb.linearVelocity = new Vector2(-transform.right.x * 10f, jumpPower);
                 wjParticles.Emit(15);
             }
@@ -354,6 +367,26 @@ public class Player : MonoBehaviour
     public int getCurHealth()
     {
         return health;
+    }
+    public void setVel(Vector2 vel)
+    {
+        rb.linearVelocity = vel;
+    }
+    public void setYVel(int vel)
+    {
+        rb.linearVelocityY = vel;
+    }
+    public void setXVel(int vel)
+    {
+        rb.linearVelocityX = vel;
+    }
+    public void setPos(Vector2 pos)
+    {
+        rb.transform.position = pos;
+    }
+    public void offsetPos(Vector2 pos)
+    {
+        rb.transform.position = new Vector2(rb.transform.position.x + pos.x, rb.transform.position.y + pos.y);
     }
     
 }
