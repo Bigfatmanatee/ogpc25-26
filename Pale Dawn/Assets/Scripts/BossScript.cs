@@ -39,6 +39,7 @@ public class BossScript : MonoBehaviour
     [Header("Prefabs")]
     [SerializeField] GameObject A1Projectile;
     [SerializeField] GameObject A2Projectile;
+    [SerializeField] GameObject A1Particles;
     [Header("Player Info")]
     [SerializeField] GameObject player;
     float hTime;
@@ -158,10 +159,14 @@ public class BossScript : MonoBehaviour
         yield return new WaitUntil(() => !goingToNode);
 
         //sliding floor projectiles
-        Instantiate(A1Projectile, ability1Nodes[2].position, ability1Nodes[2].rotation).GetComponent<Projectile>().setDirection(-1);
-        Instantiate(A1Projectile, ability1Nodes[3].position, ability1Nodes[3].rotation).GetComponent<Projectile>().setDirection(1);
+        var p1 = Instantiate(A1Projectile, ability1Nodes[2].position, ability1Nodes[2].rotation);
+        p1.GetComponent<Projectile>().setDirection(-1);
+        p1.SetActive(true);
+        var p2 = Instantiate(A1Projectile, ability1Nodes[3].position, ability1Nodes[3].rotation);
+        p2.GetComponent<Projectile>().setDirection(1);
+        p2.SetActive(true);
+        A1Particles.GetComponent<SlamParticle>().SpawnParticles();
         yield return new WaitForSeconds(1.75f);// time to dodge and attack
-
 
         StartCoroutine(MoveToNode(startPos, 0.3f));
         yield return new WaitUntil(() => !goingToNode);

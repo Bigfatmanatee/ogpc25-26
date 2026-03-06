@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class AttColider : MonoBehaviour
@@ -35,6 +36,7 @@ public class AttColider : MonoBehaviour
             if (hostIsPlayer)
             {
                 Host.GetComponent<Player>().attack(collision.gameObject);
+                //FindFirstObjectByType<HitStop>().GetComponent<HitStop>().Stop(.5f);
             }
             else if (!overrideTrigger)
             {
@@ -59,6 +61,7 @@ public class AttColider : MonoBehaviour
         //     Host.GetComponent<Player>().spark();
         // }
     }
+
     void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer(layerName))

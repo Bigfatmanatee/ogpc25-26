@@ -5439,7 +5439,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3324488859514522416
 Transform:
   m_ObjectHideFlags: 0
@@ -15447,6 +15447,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 252054cf64c23d94ea597d466e0f69bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  interact: 0
   hitBox: {fileID: 1699316873603890071}
   attHitBox: {fileID: 5746957784974775493}
   attHitBoxU: {fileID: 8607016585995253848}
@@ -15456,13 +15457,13 @@ MonoBehaviour:
   animator: {fileID: 7699764454625694587}
   wjParticles: {fileID: 4925022726823274478}
   timeManager: {fileID: 0}
-  speed: 3
+  speed: 5.85
   jumpPower: 7.5
   maxHealth: 3
   health: 0
   swingTime: 0.35
   swingCooldown: 0.5
-  DsBoost: 9
+  DsBoost: 14
   maxInvSec: 0
   HealthManager: {fileID: 0}
   swingAnimator: {fileID: 7770086229232934707}
