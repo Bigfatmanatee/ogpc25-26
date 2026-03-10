@@ -17,6 +17,7 @@ public class Player : MonoBehaviour
     private InputAction m_MoveAction;
     private InputAction m_AttackAction;
     private InputAction m_JumpAction;
+    private InputAction m_DashAction;
     private float sinceLastSwing = 0;
     private Rigidbody2D rb;
     // private bool isOnLadder = false;
@@ -46,6 +47,8 @@ public class Player : MonoBehaviour
     [SerializeField] private float swingCooldown;
     [SerializeField] private float DsBoost;
     [SerializeField] private float maxInvSec;
+    [SerializeField] private float dashCooldown;
+    private float dashTime = 0;
     private float InvSec = 0;
     private bool isSwinging = false;
 
@@ -98,6 +101,11 @@ public class Player : MonoBehaviour
         m_JumpAction.AddBinding("<Gamepad>/buttonSouth");
         m_JumpAction.AddBinding("<Keyboard>/k");
         m_JumpAction.Enable();
+
+        m_DashAction = new InputAction("Dash");
+        m_DashAction.AddBinding("<Gamepad>/buttonEast");
+        m_DashAction.AddBinding("<Keyboard>/leftShift");
+        m_DashAction.Enable();
     }
 
     private void Awake()
@@ -213,7 +221,19 @@ public class Player : MonoBehaviour
         {
             rb.gravityScale = 1f;
         }
+        
+
+    //dash code
+
+        if (m_DashAction.WasPressedThisFrame() && dashTime >= dashCooldown)
+        {
+            setVel(new Vector2((getVelX()+20)*m_PlayerMovement.x,(getVelY()+10)*m_PlayerMovement.y)); //test dash movement, make it 8-way, and moving left is slow
+            dashTime = 0;
+        }
+
+
         InvSec += Time.deltaTime;
+        dashTime += Time.deltaTime;
     }
 
     private void FixedUpdate()
@@ -382,6 +402,14 @@ public class Player : MonoBehaviour
     public float getPosY()
     {
         return rb.transform.position.y;
+    }
+    public float getVelX()
+    {
+        return rb.linearVelocityX;
+    }
+    public float getVelY()
+    {
+        return rb.linearVelocityY;
     }
     public void setVel(Vector2 vel)
     {
