@@ -46,6 +46,10 @@ public class interactable : MonoBehaviour
     }
     public virtual void OnTriggerExit2D(Collider2D collision)
     {
-        target = null;
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Player"))
+        {
+            target = null;
+        }
+        
     }
 }

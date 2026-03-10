@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Linq.Expressions;
+using System.Reflection.Emit;
+using NUnit.Framework;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
@@ -17,6 +19,7 @@ public class Player : MonoBehaviour
     private InputAction m_JumpAction;
     private float sinceLastSwing = 0;
     private Rigidbody2D rb;
+    // private bool isOnLadder = false;
     private LayerMask LmG; //Ground layer mask
     private LayerMask LmC; //enemy collision layer mask
     private LayerMask LmE; //Enemy hitbox layer mask
@@ -52,7 +55,7 @@ public class Player : MonoBehaviour
 
     [SerializeField] private Animator swingAnimator;
     [SerializeField] private GameObject swingManager;
-    private float swingOffset = 0.75f;
+    private float swingOffset = 0.75f; //swing animation distance from the center of the player
 
     [Header("Control settings")]
     [SerializeField] public float deadzone = 0.4f; //deadzone % (between 0.0 - 1.0) 
@@ -368,6 +371,18 @@ public class Player : MonoBehaviour
     {
         return health;
     }
+    public Vector2 getPos()
+    {
+        return rb.transform.position;
+    }
+    public float getPosX()
+    {
+        return rb.transform.position.x;
+    }
+    public float getPosY()
+    {
+        return rb.transform.position.y;
+    }
     public void setVel(Vector2 vel)
     {
         rb.linearVelocity = vel;
@@ -383,6 +398,14 @@ public class Player : MonoBehaviour
     public void setPos(Vector2 pos)
     {
         rb.transform.position = pos;
+    }
+    public void setPosX(float x)
+    {
+        rb.transform.position = new Vector2(x,rb.transform.position.y);
+    }
+    public void setPosY(float y)
+    {
+        rb.transform.position = new Vector2(rb.transform.position.x, y);
     }
     public void offsetPos(Vector2 pos)
     {
