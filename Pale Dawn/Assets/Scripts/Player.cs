@@ -49,6 +49,7 @@ public class Player : MonoBehaviour
     [SerializeField] private float maxInvSec;
     [SerializeField] private float dashCooldown;
     private float dashTime = 0;
+    private bool groundTouch = true;
     private float InvSec = 0;
     private bool isSwinging = false;
 
@@ -219,7 +220,7 @@ public class Player : MonoBehaviour
         }
         else
         {
-            rb.gravityScale = 1f;
+            rb.gravityScale = 1.25f; //was 1f
         }
         
 
@@ -227,13 +228,29 @@ public class Player : MonoBehaviour
 
         if (m_DashAction.WasPressedThisFrame() && dashTime >= dashCooldown)
         {
-            setVel(new Vector2((getVelX()+20)*m_PlayerMovement.x,(getVelY()+10)*m_PlayerMovement.y)); //test dash movement, make it 8-way, and moving left is slow
+            Debug.Log("X from "+getVelX()+" to "+((Math.Abs(getVelX())+20)*m_PlayerMovement.x));
+            // Debug.Log("Y from "+getVelY()+" to "+(getVelY()+(10*m_PlayerMovement.y)));
+            setVel(
+                new Vector2(
+                    (Math.Abs(getVelX())+20)*m_PlayerMovement.x,
+                    // getVelY()+(10*m_PlayerMovement.y)
+                    11*m_PlayerMovement.y //fine tune speed and make hold jumps less floaty
+                )
+            ); //test dash movement, make it 8-way, and moving left is slow
             dashTime = 0;
+            groundTouch = false;
         }
 
 
         InvSec += Time.deltaTime;
-        dashTime += Time.deltaTime;
+        if (isGrounded())
+        {
+            groundTouch = true;
+        }
+        if (groundTouch)
+        {
+            dashTime += Time.deltaTime;
+        }
     }
 
     private void FixedUpdate()
@@ -277,7 +294,8 @@ public class Player : MonoBehaviour
             if (transform.eulerAngles.y != 0)
             {
                 swingManager.GetComponent<SwingAnim>().setPos(attHitBox.transform,180,-swingOffset,0); //flip instead of rotate?
-            } else
+            } 
+            else
             {
                 swingManager.GetComponent<SwingAnim>().setPos(attHitBox.transform,0,swingOffset,0);
             }
