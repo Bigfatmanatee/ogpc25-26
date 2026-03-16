@@ -314,6 +314,12 @@ public class Player : MonoBehaviour
     }
     public void attack(GameObject enemy)
     {
+        if (enemy.layer == 15)
+        {
+            StartCoroutine(onHit());  
+            return;
+        }
+            
         if (enemy.GetComponent<BossScript>() != null)
         {
             enemy.GetComponent<BossScript>().damage(gameObject);

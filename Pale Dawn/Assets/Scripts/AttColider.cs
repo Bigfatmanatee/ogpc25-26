@@ -30,9 +30,11 @@ public class AttColider : MonoBehaviour
     void OnTriggerEnter2D(Collider2D collision) //needs to get assigned host to send back info
     {
         // Debug.Log("Entered collision of layer "+collision.gameObject.layer);
-        if (collision.gameObject.layer == LayerMask.NameToLayer(layerName))
-        {
+        if (hostIsPlayer && collision.gameObject.layer == 15) //spikes
+            Host.GetComponent<Player>().attack(collision.gameObject);
 
+        if (collision.gameObject.layer == LayerMask.NameToLayer(layerName))
+        {   
             if (hostIsPlayer)
             {
                 Host.GetComponent<Player>().attack(collision.gameObject);
