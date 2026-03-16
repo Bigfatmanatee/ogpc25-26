@@ -228,15 +228,19 @@ public class Player : MonoBehaviour
 
         if (m_DashAction.WasPressedThisFrame() && dashTime >= dashCooldown)
         {
+            float xTest = 0.5f;
+            if (m_PlayerMovement.x >= 0.3)
+            {
+                xTest = m_PlayerMovement.x;
+            }
             Debug.Log("X from "+getVelX()+" to "+((Math.Abs(getVelX())+20)*m_PlayerMovement.x));
-            // Debug.Log("Y from "+getVelY()+" to "+(getVelY()+(10*m_PlayerMovement.y)));
+            Debug.Log("Y from "+getVelY()+" to "+(17*m_PlayerMovement.y*xTest));
             setVel(
                 new Vector2(
                     (Math.Abs(getVelX())+20)*m_PlayerMovement.x,
-                    // getVelY()+(10*m_PlayerMovement.y)
-                    11*m_PlayerMovement.y //fine tune speed and make hold jumps less floaty
+                    17*m_PlayerMovement.y*xTest //straight and diagonal dash feel fine, fix upward dash. was 11
                 )
-            ); //test dash movement, make it 8-way, and moving left is slow
+            );
             dashTime = 0;
             groundTouch = false;
         }
