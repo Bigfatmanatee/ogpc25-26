@@ -15466,6 +15466,7 @@ MonoBehaviour:
   DsBoost: 14
   maxInvSec: 0.25
   dashCooldown: 0.5
+  maxGravTime: 0.1
   HealthManager: {fileID: 0}
   swingAnimator: {fileID: 7770086229232934707}
   swingManager: {fileID: 2327918628683464607}

@@ -13323,17 +13323,21 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 376307479}
+    - target: {fileID: 2181323042885507186, guid: 152dba935a00cbe47b98ba481e1501fd, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3022732288095057393, guid: 152dba935a00cbe47b98ba481e1501fd, type: 3}
       propertyPath: m_Name
       value: Canvas
       objectReference: {fileID: 0}
     - target: {fileID: 5737203023269617325, guid: 152dba935a00cbe47b98ba481e1501fd, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5737203023269617325, guid: 152dba935a00cbe47b98ba481e1501fd, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -48,7 +48,9 @@ public class Player : MonoBehaviour
     [SerializeField] private float DsBoost;
     [SerializeField] private float maxInvSec;
     [SerializeField] private float dashCooldown;
+    [SerializeField] private float maxGravTime;
     private float dashTime = 0;
+    private float gravTime = 99;
     private bool groundTouch = true;
     private float InvSec = 0;
     private bool isSwinging = false;
@@ -210,14 +212,18 @@ public class Player : MonoBehaviour
         {
             rb.linearVelocityY = rb.linearVelocity.y * 0.25f; //was new Vector2(rb.linearVelocity.x, rb.linearVelocity.y * 0.25f);
         }
-        if (!isGrounded() && !jumping) //falling without holding space
+        if (gravTime < maxGravTime)
+        {
+            rb.gravityScale = 0.3f;
+        }
+        else if (!isGrounded() && !jumping) //falling without holding space
         {
             rb.gravityScale = 2f; //was 1.75
         }
         else if (isGrounded() && !jumping)
         {
             rb.linearVelocityY *= 0.95f;
-        }
+        } 
         else
         {
             rb.gravityScale = 1.25f; //was 1f
@@ -241,14 +247,17 @@ public class Player : MonoBehaviour
                     17*m_PlayerMovement.y*xTest //straight and diagonal dash feel fine, fix upward dash. was 11
                 )
             );
+            gravTime = 0;
             dashTime = 0;
             groundTouch = false;
         }
 
 
         InvSec += Time.deltaTime;
+        gravTime += Time.deltaTime;
         if (isGrounded())
         {
+            gravTime = 99f;
             groundTouch = true;
         }
         if (groundTouch)
