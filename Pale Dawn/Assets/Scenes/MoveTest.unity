@@ -13094,6 +13094,18 @@ PrefabInstance:
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 5401654345463992669, guid: 75993c777a2b02d42afbddfd7a2b62f7, type: 3}
+      propertyPath: speed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5401654345463992669, guid: 75993c777a2b02d42afbddfd7a2b62f7, type: 3}
+      propertyPath: jumpPower
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5401654345463992669, guid: 75993c777a2b02d42afbddfd7a2b62f7, type: 3}
+      propertyPath: maxHealth
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5401654345463992669, guid: 75993c777a2b02d42afbddfd7a2b62f7, type: 3}
       propertyPath: HealthManager
       value: 
       objectReference: {fileID: 1764300116}
