@@ -212,9 +212,9 @@ public class Player : MonoBehaviour
         {
             rb.linearVelocityY = rb.linearVelocity.y * 0.25f; //was new Vector2(rb.linearVelocity.x, rb.linearVelocity.y * 0.25f);
         }
-        if (gravTime < maxGravTime)
+        if (gravTime < maxGravTime) //stall falling from a dash
         {
-            rb.gravityScale = 0.3f;
+            rb.gravityScale = 0.1f;
         }
         else if (!isGrounded() && !jumping) //falling without holding space
         {
@@ -234,17 +234,21 @@ public class Player : MonoBehaviour
 
         if (m_DashAction.WasPressedThisFrame() && dashTime >= dashCooldown)
         {
-            float xTest = 0.5f;
+            float xTest = 0.65f;
             if (m_PlayerMovement.x >= 0.3)
             {
                 xTest = m_PlayerMovement.x;
+            } 
+            else if (m_PlayerMovement.x <= -0.3)
+            {
+                xTest = -m_PlayerMovement.x;
             }
             Debug.Log("X from "+getVelX()+" to "+((Math.Abs(getVelX())+20)*m_PlayerMovement.x));
             Debug.Log("Y from "+getVelY()+" to "+(17*m_PlayerMovement.y*xTest));
             setVel(
                 new Vector2(
                     (Math.Abs(getVelX())+20)*m_PlayerMovement.x,
-                    17*m_PlayerMovement.y*xTest //straight and diagonal dash feel fine, fix upward dash. was 11
+                    16*m_PlayerMovement.y*xTest
                 )
             );
             gravTime = 0;
