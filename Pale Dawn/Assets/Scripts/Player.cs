@@ -48,13 +48,12 @@ public class Player : MonoBehaviour
     [SerializeField] private float DsBoost;
     [SerializeField] private float maxInvSec;
     [SerializeField] private float dashCooldown;
-<<<<<<< Updated upstream
+
     [SerializeField] private float maxGravTime;
-=======
     [SerializeField] private GameObject dashParticles;
     [SerializeField] private float dashParticleTime = 0.5f;
     [SerializeField] private GameObject pogoParticles;
->>>>>>> Stashed changes
+
     private float dashTime = 0;
     private float gravTime = 99;
     private bool groundTouch = true;
@@ -248,12 +247,12 @@ public class Player : MonoBehaviour
 
         if (m_DashAction.WasPressedThisFrame() && dashTime >= dashCooldown)
         {
-<<<<<<< Updated upstream
+
             float xTest = 0.65f;
-=======
+
             StartCoroutine(DashParticles());
-            float xTest = 0.5f;
->>>>>>> Stashed changes
+
+
             if (m_PlayerMovement.x >= 0.3)
             {
                 xTest = m_PlayerMovement.x;
