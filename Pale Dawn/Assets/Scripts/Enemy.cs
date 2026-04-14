@@ -26,6 +26,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] protected Animator anim;
     [SerializeField] protected int direction = 1;
     [SerializeField] private SpriteRenderer spriteRenderer;
+    [SerializeField] Transform deatheffect;
     protected Rigidbody2D rb;
     protected LayerMask LmG;
     void Start()
@@ -207,6 +208,7 @@ public class Enemy : MonoBehaviour
     }
     public void die()
     {
+        deatheffect.GetComponent<EnemyDeathParticles>().PlayParticles(30);
         Destroy(gameObject);
     }
     protected virtual void move()
