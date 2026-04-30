@@ -528,9 +528,21 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 875561955}
+    - target: {fileID: 968879640507013199, guid: 152dba935a00cbe47b98ba481e1501fd, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1427474910}
     - target: {fileID: 3022732288095057393, guid: 152dba935a00cbe47b98ba481e1501fd, type: 3}
       propertyPath: m_Name
       value: Canvas 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5737203023269617325, guid: 152dba935a00cbe47b98ba481e1501fd, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5737203023269617325, guid: 152dba935a00cbe47b98ba481e1501fd, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1582,6 +1594,67 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!1001 &570485851
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2531623301444410586, guid: 246799032cd9541079ae99115b94177d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 37.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 2531623301444410586, guid: 246799032cd9541079ae99115b94177d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -3.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2531623301444410586, guid: 246799032cd9541079ae99115b94177d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2531623301444410586, guid: 246799032cd9541079ae99115b94177d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2531623301444410586, guid: 246799032cd9541079ae99115b94177d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2531623301444410586, guid: 246799032cd9541079ae99115b94177d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2531623301444410586, guid: 246799032cd9541079ae99115b94177d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2531623301444410586, guid: 246799032cd9541079ae99115b94177d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2531623301444410586, guid: 246799032cd9541079ae99115b94177d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2531623301444410586, guid: 246799032cd9541079ae99115b94177d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3527218271951503200, guid: 246799032cd9541079ae99115b94177d, type: 3}
+      propertyPath: m_Name
+      value: Killzone (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3863135211866493860, guid: 246799032cd9541079ae99115b94177d, type: 3}
+      propertyPath: m_Size.x
+      value: 100
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 246799032cd9541079ae99115b94177d, type: 3}
 --- !u!1 &588688738
 GameObject:
   m_ObjectHideFlags: 0
@@ -26534,6 +26607,11 @@ MonoBehaviour:
   - {x: 0.54224694, y: 57.214127, z: 0}
   - {x: -23.515104, y: 57.354156, z: 0}
   - {x: -23.10362, y: 0.17074263, z: 0}
+--- !u!1 &806716089 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2809709616346962703, guid: 152dba935a00cbe47b98ba481e1501fd, type: 3}
+  m_PrefabInstance: {fileID: 170087424}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &842467626
 GameObject:
   m_ObjectHideFlags: 0
@@ -26741,6 +26819,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 5401654345463992669, guid: 75993c777a2b02d42afbddfd7a2b62f7, type: 3}
+      propertyPath: HealthManager
+      value: 
+      objectReference: {fileID: 806716089}
     - target: {fileID: 5401654345463992669, guid: 75993c777a2b02d42afbddfd7a2b62f7, type: 3}
       propertyPath: 'HealthBar.Array.data[0]'
       value: 
@@ -46192,3 +46274,4 @@ SceneRoots:
   - {fileID: 1967221106}
   - {fileID: 1303371082}
   - {fileID: 860420972}
+  - {fileID: 570485851}

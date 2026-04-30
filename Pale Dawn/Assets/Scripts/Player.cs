@@ -7,6 +7,7 @@ using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -48,6 +49,7 @@ public class Player : MonoBehaviour
     [SerializeField] private float DsBoost;
     [SerializeField] private float maxInvSec;
     [SerializeField] private float dashCooldown;
+    
 
     [SerializeField] private float maxGravTime;
     [SerializeField] private GameObject dashParticles;
@@ -67,6 +69,8 @@ public class Player : MonoBehaviour
     [SerializeField] private Animator swingAnimator;
     [SerializeField] private GameObject swingManager;
     private float swingOffset = 0.75f; //swing animation distance from the center of the player
+    string currentSceneName = "0";
+    
 
     [Header("Control settings")]
     [SerializeField] public float deadzone = 0.4f; //deadzone % (between 0.0 - 1.0) 
@@ -75,6 +79,7 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
+        currentSceneName = SceneManager.GetActiveScene().name;
         health = maxHealth;
         rb = GetComponent<Rigidbody2D>();
         LmG = LayerMask.GetMask("Ground");
@@ -427,9 +432,9 @@ public class Player : MonoBehaviour
             yield return new WaitForSeconds(0.15f);
         }
     }
-    private void die()
+    public void die()
     {
-        throw new NotImplementedException();
+        SceneManager.LoadScene(currentSceneName);
     }
 
     public int getDamage() {
